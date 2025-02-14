@@ -6,7 +6,7 @@ import Controls from '@/components/header/controls/Controls.vue'
 <template>
   <header class="w-full border-b-2 border-[#EAEAEA]">
     <div class="container">
-      <div class="p-11 flex justify-between items-center">
+      <div class="py-11 flex justify-between items-center">
         <Logo />
         <Controls />
       </div>
