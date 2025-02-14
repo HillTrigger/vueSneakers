@@ -3,5 +3,7 @@ import SneakersCard from './SneackersCard/SneakersCard.vue'
 </script>
 
 <template>
-  <SneakersCard />
+  <div>
+    <SneakersCard />
+  </div>
 </template>
