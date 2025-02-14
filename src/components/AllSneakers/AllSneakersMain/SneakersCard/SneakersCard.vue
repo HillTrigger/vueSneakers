@@ -16,16 +16,26 @@ defineProps({
     type: Number,
     default: 15199,
   },
+  isAdded: {
+    type: Boolean,
+    default: false,
+  },
+  isFavorite: {
+    type: Boolean,
+    default: false,
+  },
 })
 </script>
 
 <template>
-  <div class="p-8 pt-5 border-[#F3F3F3] border-2 rounded-3xl flex flex-col w-52 relative">
-    <img class="pointer-events-none" :src="imageUrl" :alt="title" />
+  <div
+    class="p-8 pt-5 border-[#F3F3F3] border-2 rounded-3xl flex flex-col relative hover:-translate-y-2 hover:shadow-xl transition-transform cursor-pointer"
+  >
+    <img class="pointer-events-none max-w-36" :src="imageUrl" :alt="title" />
     <h5 class="text-sm mb-3.5">{{ title }}</h5>
     <div class="absolute cursor-pointer">
-      <LikeOff class="hidden" />
-      <LikeOn />
+      <LikeOff v-if="isFavorite" />
+      <LikeOn v-else />
     </div>
     <div class="flex justify-between items-center">
       <div class="flex flex-col">
@@ -33,8 +43,8 @@ defineProps({
         <span class="text-sm font-bold">{{ price.toLocaleString('ru-RU') + ' руб.' }}</span>
       </div>
       <div class="cursor-pointer">
-        <Plus class="hidden" />
-        <Checked />
+        <Plus v-if="isAdded" />
+        <Checked v-else />
       </div>
     </div>
   </div>
