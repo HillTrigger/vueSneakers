@@ -7,6 +7,6 @@ import DriverCart from '@/components/modals/DriverCart/DriverCart.vue'
   <Header />
   <Main />
   <Teleport to="body">
-    <DriverCart />
+    <!-- <DriverCart /> -->
   </Teleport>
 </template>

@@ -1,10 +1,24 @@
 <script setup lang="js">
-import { sneakersData } from './constans'
+import { onMounted, ref } from 'vue'
+import axios from 'axios'
+
 import { favoriteToggle } from './model/favoriteToggle'
 import AllSneakersLayout from './ui/AllSneakersLayout.vue'
 import AllSneakersMain from './ui/AllSneakersMain.vue'
 import AllSneakersTop from './ui/AllSneakersTop.vue'
 import SneakersCard from './ui/SneakersCard.vue'
+
+const sneakersData = ref([])
+
+onMounted(async () => {
+  try {
+    const { data } = await axios('https://72f7c776150d43f2.mokky.dev/items')
+
+    sneakersData.value = data
+  } catch (err) {
+    console.log(err)
+  }
+})
 </script>
 
 <template>
