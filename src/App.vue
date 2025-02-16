@@ -1,12 +1,12 @@
 <script setup lang="js">
 import Header from '@/components/header/Header.vue'
 import Main from '@/components/main/Main.vue'
-import DriverCart from '@/components/modals/DriverCart/DriverCart.vue'
+import { ref } from 'vue'
+
+const DriverCartIsOpen = ref(false)
+console.log(DriverCartIsOpen.value)
 </script>
 <template>
   <Header />
   <Main />
-  <Teleport to="body">
-    <!-- <DriverCart /> -->
-  </Teleport>
 </template>
