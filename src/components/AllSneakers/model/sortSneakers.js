@@ -1,7 +1,6 @@
 import { sortMethods, sortOrder } from '../constans';
 
 export function sortSneakers(sneakersData, sortBy) {
-  console.log(sortBy.name);
   switch (sortBy.name) {
     case sortMethods.sortByDefault:
       if (sortBy[sortMethods.sortByDefault] === sortOrder.asc) {

@@ -1,9 +1,9 @@
 <script setup lang="js">
-import { defineEmits, onMounted } from 'vue';
+import { defineEmits } from 'vue';
 import Search from '@/assets/search.svg';
 import { sortMethods } from '../constans';
 
-const { filter } = defineProps({
+const props = defineProps({
   search: {
     type: String,
     default: '',
@@ -20,13 +20,13 @@ const { filter } = defineProps({
   },
 });
 
-const emit = defineEmits(['update:search', 'update:filter']);
+const emit = defineEmits(['update:search', 'update:filter', 'handleSortChange']);
 const handleInput = (event) => {
   emit('update:search', event.target.value);
 };
 const handleSelect = (e) => {
   emit('update:filter', {
-    ...filter,
+    ...props.filter,
     name: e.target.value,
   });
 };
@@ -40,11 +40,11 @@ const handleSelect = (e) => {
         @change="handleSelect"
         class="cursor-pointer flex items-center border-[#F3F3F3] border-2 rounded-xl px-4 placeholder-[#C4C4C4]"
       >
-        <option @mousedown="handleSortChange" :value="sortMethods.sortByDefault">
-          По порядку {{ filter[sortMethods.sortByDefault] }}
+        <option @mousedown="(e) => emit('handleSortChange', e)" :value="sortMethods.sortByDefault">
+          По порядку {{ props.filter[sortMethods.sortByDefault] }}
         </option>
-        <option @mousedown="handleSortChange" :value="sortMethods.sortByPrice">
-          По цене {{ filter[sortMethods.sortByPrice] }}
+        <option @mousedown="(e) => emit('handleSortChange', e)" :value="sortMethods.sortByPrice">
+          По цене {{ props.filter[sortMethods.sortByPrice] }}
         </option>
       </select>
       <div class="relative flex">

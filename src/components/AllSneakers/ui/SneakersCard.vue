@@ -3,6 +3,7 @@ import Plus from '@/assets/Plus.svg';
 import Checked from '@/assets/Checked.svg';
 import LikeOff from '@/assets/like-1.svg';
 import LikeOn from '@/assets/like-2.svg';
+import { onMounted, ref } from 'vue';
 defineProps({
   imageUrl: {
     type: String,
@@ -10,7 +11,6 @@ defineProps({
   },
   title: {
     type: String,
-    required: true,
   },
   price: {
     type: Number,
@@ -24,13 +24,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  favoriteToggle: {
-    type: Function,
-    default: () => {
-      alert('Не передали функцию в компонент!');
-    },
-  },
 });
+
+const emit = defineEmits(['favoriteToggle']);
+const likeRef = ref(null);
 </script>
 
 <template>
@@ -40,19 +37,23 @@ defineProps({
   >
     <img class="pointer-events-none max-w-36" :src="imageUrl" :alt="title" />
     <h5 class="text-sm mb-3.5">{{ title }}</h5>
-    <div class="absolute cursor-pointer">
+    <button
+      ref="likeRef"
+      @click="() => emit('favoriteToggle', likeRef)"
+      class="absolute cursor-pointer"
+    >
       <LikeOn v-if="isFavorite" class="text-[#FEF0F0] hover:text-[rgb(234,221,221)]" />
       <LikeOff v-else class="text-white hover:text-gray-100" />
-    </div>
+    </button>
     <div class="flex justify-between items-center mt-auto">
       <div class="flex flex-col">
         <span class="text-xs text-[#BDBDBD]">ЦЕНА:</span>
         <span class="text-sm font-bold">{{ price.toLocaleString('ru-RU') + ' руб.' }}</span>
       </div>
-      <div @click="favoriteToggle" class="cursor-pointer">
+      <button class="cursor-pointer">
         <Checked v-if="isAdded" />
         <Plus v-else class="text-white hover:text-gray-100" />
-      </div>
+      </button>
     </div>
   </div>
 </template>

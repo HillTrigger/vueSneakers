@@ -1,4 +1,6 @@
 <script setup lang="js">
+import { ref } from 'vue';
+
 import { favoriteToggle } from './model/favoriteToggle';
 import AllSneakersLayout from './ui/AllSneakersLayout.vue';
 import AllSneakersMain from './ui/AllSneakersMain.vue';
@@ -13,7 +15,7 @@ const { allSneakersSettings } = useSneakers();
 <template>
   <AllSneakersLayout>
     <AllSneakersTop
-      :handleSortChange="(e) => handleSortChange(allSneakersSettings, e)"
+      @handleSortChange="(e) => handleSortChange(allSneakersSettings, e)"
       v-model:filter="allSneakersSettings.sortBy"
       v-model:search="allSneakersSettings.searchQuery"
     />
@@ -21,12 +23,13 @@ const { allSneakersSettings } = useSneakers();
       <SneakersCard
         v-for="sneaker in allSneakersSettings.sneakersSorted"
         :key="sneaker.id"
+        :id="sneaker.id"
         :imageUrl="sneaker.imageUrl"
         :title="sneaker.title"
         :price="sneaker.price"
         :isAdded="sneaker.isAdded"
         :isFavorite="sneaker.isFavorite"
-        :favoriteToggle="favoriteToggle"
+        @favoriteToggle="(likeRef) => favoriteToggle(sneaker, likeRef)"
       />
     </AllSneakersMain>
   </AllSneakersLayout>
