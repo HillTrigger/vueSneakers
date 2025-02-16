@@ -20,21 +20,18 @@ export function useSneakers() {
   onMounted(async () => {
     try {
       const { data } = await axios('https://72f7c776150d43f2.mokky.dev/items');
-      let favorites = await getFavorites();
+      const favorites = await getFavorites();
 
       const newData = data.map((sneaker) => {
-        if (
-          favorites.some((favorite) => {
-            return favorite.parentId === sneaker.id;
-          })
-        ) {
-          return {
-            ...sneaker,
-            isFavorite: true,
-          };
-        } else {
-          return sneaker;
-        }
+        const favorite = favorites.find((favorite) => favorite.parentId === sneaker.id);
+
+        if (!favorite) return sneaker;
+
+        return {
+          ...sneaker,
+          isFavorite: true,
+          favoriteId: favorite.id,
+        };
       });
       allSneakersSettings.sneakersData = newData;
       allSneakersSettings.sneakersSorted = newData;
