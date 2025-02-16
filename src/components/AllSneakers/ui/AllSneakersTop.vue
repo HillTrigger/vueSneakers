@@ -49,7 +49,6 @@ const handleSelect = (e) => {
       </select>
       <div class="relative flex">
         <input
-          disabled
           placeholder="Поиск..."
           class="border-[#F3F3F3] focus:border-slate-400 border-2 rounded-xl pl-8 pr-4 outline-none placeholder-[#C4C4C4]"
           type="text"

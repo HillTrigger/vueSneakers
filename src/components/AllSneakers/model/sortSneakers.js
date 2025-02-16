@@ -1,25 +1,22 @@
-// export function sortSneakers(sneakersData, sortMethodId) {
-//   switch (sortMethodId) {
-//     case 1:
-//       return [...todos].sort((a, b) => a.id - b.id);
-//     case 2:
-//       return [...todos].sort((a, b) => {
-//         if (a.complete == b.complete) {
-//           return a.id - b.id;
-//         } else {
-//           return a.complete ? 1 : -1;
-//         }
-//       });
-//     case 3:
-//       return [...todos].sort((a, b) => {
-//         if (a.complete == b.complete) {
-//           return a.id - b.id;
-//         } else {
-//           return a.complete ? -1 : 1;
-//         }
-//       });
-//     default:
-//       console.log('error sortTodos');
-//       return todos;
-//   }
-// }
+import { sortMethods, sortOrder } from '../constans';
+
+export function sortSneakers(sneakersData, sortBy) {
+  console.log(sortBy.name);
+  switch (sortBy.name) {
+    case sortMethods.sortByDefault:
+      if (sortBy[sortMethods.sortByDefault] === sortOrder.asc) {
+        return [...sneakersData].sort((a, b) => a.id - b.id);
+      } else {
+        return [...sneakersData].sort((a, b) => b.id - a.id);
+      }
+    case sortMethods.sortByPrice:
+      if (sortBy[sortMethods.sortByPrice] === sortOrder.asc) {
+        return [...sneakersData].sort((a, b) => a.price - b.price);
+      } else {
+        return [...sneakersData].sort((a, b) => b.price - a.price);
+      }
+    default:
+      console.log('error sneakersData');
+      return sneakersData;
+  }
+}

@@ -17,7 +17,6 @@ const { allSneakersSettings } = useSneakers();
       v-model:filter="allSneakersSettings.sortBy"
       v-model:search="allSneakersSettings.searchQuery"
     />
-    <h2>{{ allSneakersSettings.sortBy }}</h2>
     <AllSneakersMain>
       <SneakersCard
         v-for="sneaker in allSneakersSettings.sneakersSorted"

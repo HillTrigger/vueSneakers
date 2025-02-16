@@ -2,6 +2,7 @@ import { reactive, onMounted, watch } from 'vue';
 import axios from 'axios';
 import { searchSneakers } from './searchSneakers';
 import { sortMethods, sortOrder } from '../constans';
+import { sortSneakers } from './sortSneakers';
 
 export function useSneakers() {
   const allSneakersSettings = reactive({
@@ -25,27 +26,20 @@ export function useSneakers() {
     }
   });
 
-  // watch(
-  //   () => allSneakersSettings.searchQuery,
-  //   () => {
-  //     allSneakersSettings.sneakersSorted = searchSneakers(
-  //       allSneakersSettings.sneakersData,
-  //       allSneakersSettings.searchQuery,
-  //     );
-  //   },
-  //   { flush: 'post' },
-  // );
-  // watch(
-  //   () => allSneakersSettings.sortBy,
-  //   () => {
-  //     allSneakersSettings.sneakersSorted = sortSneakers(
-  //       allSneakersSettings.sneakersData,
-  //       allSneakersSettings.searchQuery,
-  //     );
-  //   },
-  //   { flush: 'post' },
-  // );
-
+  watch(
+    () => [allSneakersSettings.searchQuery, allSneakersSettings.sortBy],
+    () => {
+      let filteredSneakers = searchSneakers(
+        allSneakersSettings.sneakersData,
+        allSneakersSettings.searchQuery,
+      );
+      allSneakersSettings.sneakersSorted = sortSneakers(
+        filteredSneakers,
+        allSneakersSettings.sortBy,
+      );
+    },
+    { flush: 'post' },
+  );
   return {
     allSneakersSettings,
   };
