@@ -1,20 +1,23 @@
 <script setup lang="js">
-import { onMounted, reactive, ref, watch } from 'vue';
-import axios from 'axios';
-
 import { favoriteToggle } from './model/favoriteToggle';
 import AllSneakersLayout from './ui/AllSneakersLayout.vue';
 import AllSneakersMain from './ui/AllSneakersMain.vue';
 import AllSneakersTop from './ui/AllSneakersTop.vue';
 import SneakersCard from './ui/SneakersCard.vue';
 import { useSneakers } from './model/useSneakers';
+import { handleSortChange } from './model/handleSortChange';
 
 const { allSneakersSettings } = useSneakers();
 </script>
 
 <template>
   <AllSneakersLayout>
-    <AllSneakersTop v-model="allSneakersSettings.searchQuery" />
+    <AllSneakersTop
+      :handleSortChange="(e) => handleSortChange(allSneakersSettings, e)"
+      v-model:filter="allSneakersSettings.sortBy"
+      v-model:search="allSneakersSettings.searchQuery"
+    />
+    <h2>{{ allSneakersSettings.sortBy }}</h2>
     <AllSneakersMain>
       <SneakersCard
         v-for="sneaker in allSneakersSettings.sneakersSorted"
