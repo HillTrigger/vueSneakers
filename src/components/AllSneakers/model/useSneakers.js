@@ -3,6 +3,7 @@ import axios from 'axios';
 import { searchSneakers } from './searchSneakers';
 import { sortMethods, sortOrder } from '../constans';
 import { sortSneakers } from './sortSneakers';
+import { getFavorites } from './getFavorites';
 
 export function useSneakers() {
   const allSneakersSettings = reactive({
@@ -19,8 +20,24 @@ export function useSneakers() {
   onMounted(async () => {
     try {
       const { data } = await axios('https://72f7c776150d43f2.mokky.dev/items');
-      allSneakersSettings.sneakersData = data;
-      allSneakersSettings.sneakersSorted = data;
+      let favorites = await getFavorites();
+
+      const newData = data.map((sneaker) => {
+        if (
+          favorites.some((favorite) => {
+            return favorite.parentId === sneaker.id;
+          })
+        ) {
+          return {
+            ...sneaker,
+            isFavorite: true,
+          };
+        } else {
+          return sneaker;
+        }
+      });
+      allSneakersSettings.sneakersData = newData;
+      allSneakersSettings.sneakersSorted = newData;
     } catch (err) {
       console.log(err);
     }
