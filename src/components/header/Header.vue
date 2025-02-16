@@ -1,18 +1,21 @@
 <script setup lang="js">
-import Logo from '@/components/logo/Logo.vue'
-import Basket from '@/components/header/ui/icons/Basket.vue'
-import Heart from '@/components/header/ui/icons/Heart.vue'
-import People from '@/components/header/ui/icons/People.vue'
-import Controls from '@/components/header/ui/Controls.vue'
-import Control from '@/components/header/ui/Сontrol.vue'
-import HeaderLayout from '@/components/header/ui/HeaderLayout.vue'
+import Logo from '@/components/logo/Logo.vue';
+import Basket from '@/components/header/ui/icons/Basket.vue';
+import Heart from '@/components/header/ui/icons/Heart.vue';
+import People from '@/components/header/ui/icons/People.vue';
+import Controls from '@/components/header/ui/Controls.vue';
+import Control from '@/components/header/ui/Сontrol.vue';
+import HeaderLayout from '@/components/header/ui/HeaderLayout.vue';
+import { inject } from 'vue';
+
+const { driverCartOpen } = inject('driverCartActions');
 </script>
 
 <template>
   <HeaderLayout>
     <Logo />
     <Controls>
-      <Control isBold>
+      <Control isBold @click="driverCartOpen">
         <template #svg>
           <Basket />
         </template>

@@ -1,5 +1,5 @@
 <script setup lang="js">
-import { ref } from 'vue';
+import { inject } from 'vue';
 
 import { favoriteToggle } from './model/favoriteToggle';
 import AllSneakersLayout from './ui/AllSneakersLayout.vue';
@@ -8,11 +8,19 @@ import AllSneakersTop from './ui/AllSneakersTop.vue';
 import SneakersCard from './ui/SneakersCard.vue';
 import { useSneakers } from './model/useSneakers';
 import { handleSortChange } from './model/handleSortChange';
+import DriverCart from '../modals/DriverCart/DriverCart.vue';
 
 const { allSneakersSettings } = useSneakers();
+
+const { driverCartState } = inject('driverCartActions');
 </script>
 
 <template>
+  <Teleport to="body">
+    <transition name="fade">
+      <DriverCart v-if="driverCartState" />
+    </transition>
+  </Teleport>
   <AllSneakersLayout>
     <AllSneakersTop
       @handleSortChange="(e) => handleSortChange(allSneakersSettings, e)"

@@ -1,10 +1,12 @@
 <script setup lang="js">
-import Header from '@/components/header/Header.vue'
-import Main from '@/components/main/Main.vue'
-import { ref } from 'vue'
+import Header from '@/components/header/Header.vue';
+import Main from '@/components/main/Main.vue';
+import { onMounted, provide, ref } from 'vue';
+import { useDriverCart } from './App/js/useDriverCart';
 
-const DriverCartIsOpen = ref(false)
-console.log(DriverCartIsOpen.value)
+const driverCartActions = useDriverCart();
+
+provide('driverCartActions', driverCartActions);
 </script>
 <template>
   <Header />
