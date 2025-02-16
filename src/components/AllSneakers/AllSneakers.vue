@@ -7,38 +7,9 @@ import AllSneakersLayout from './ui/AllSneakersLayout.vue';
 import AllSneakersMain from './ui/AllSneakersMain.vue';
 import AllSneakersTop from './ui/AllSneakersTop.vue';
 import SneakersCard from './ui/SneakersCard.vue';
-import { searchSneakers } from './model/searchSneakers';
+import { useSneakers } from './model/useSneakers';
 
-const allSneakersSettings = reactive({
-  sneakersData: [],
-  sneakersSorted: [],
-  searchQuery: '',
-});
-// const sneakersData = ref([]);
-// const allSneakersCards = ref([]);
-// const searchQuery = ref('');
-
-onMounted(async () => {
-  try {
-    const { data } = await axios('https://72f7c776150d43f2.mokky.dev/items');
-
-    allSneakersSettings.sneakersData = data;
-    allSneakersSettings.sneakersSorted = data;
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-watch(
-  () => allSneakersSettings.searchQuery,
-  () => {
-    allSneakersSettings.sneakersSorted = searchSneakers(
-      allSneakersSettings.sneakersData,
-      allSneakersSettings.searchQuery,
-    );
-  },
-  { flush: 'post' },
-);
+const { allSneakersSettings } = useSneakers();
 </script>
 
 <template>
