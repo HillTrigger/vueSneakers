@@ -17,6 +17,8 @@ defineProps({
 });
 
 const { driverCartClose } = inject('driverCartActions');
+
+const emit = defineEmits(['addToCart']);
 </script>
 
 <template>
@@ -30,6 +32,7 @@ const { driverCartClose } = inject('driverCartActions');
           :imageUrl="sneaker.imageUrl"
           :title="sneaker.title"
           :price="sneaker.price"
+          @addToCart="(btnCartRef) => emit('addToCart', sneaker, btnCartRef)"
         />
       </DriverCartMain>
       <DriverCartBottom>Низ</DriverCartBottom>

@@ -1,5 +1,6 @@
 <script setup lang="js">
-import Cross from '@/assets/close.svg'
+import Cross from '@/assets/close.svg';
+import { ref } from 'vue';
 defineProps({
   imageUrl: {
     type: String,
@@ -13,13 +14,11 @@ defineProps({
     type: Number,
     default: 12999,
   },
-  // favoriteToggle: {
-  //   type: Function,
-  //   default: () => {
-  //     alert('Не передали функцию в компонент!')
-  //   },
-  // },
-})
+});
+
+const emit = defineEmits(['addToCart']);
+
+const btnCartRef = ref(null);
 </script>
 
 <template>
@@ -31,6 +30,10 @@ defineProps({
       <p class="text-sm">{{ title }}</p>
       <span class="text-sm font-bold" n>{{ price.toLocaleString('ru-RU') + ' руб.' }}</span>
     </div>
-    <Cross class="max-w-8 h-8 w-full text-white self-end cursor-pointer hover:text-gray-100" />
+    <Cross
+      @click="() => emit('addToCart', btnCartRef)"
+      ref="btnCartRef"
+      class="max-w-8 h-8 w-full text-white self-end cursor-pointer hover:text-gray-100"
+    />
   </div>
 </template>

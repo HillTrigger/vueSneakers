@@ -19,7 +19,11 @@ const { driverCartState } = inject('driverCartActions');
 <template>
   <Teleport to="body">
     <transition name="driverCart">
-      <DriverCart v-if="driverCartState" :cartItems="allSneakersSettings.cartItems" />
+      <DriverCart
+        v-if="driverCartState"
+        :cartItems="allSneakersSettings.cartItems"
+        @addToCart="(sneaker, btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
+      />
     </transition>
   </Teleport>
   <AllSneakersLayout>

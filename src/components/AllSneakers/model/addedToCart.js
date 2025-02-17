@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export async function addToCart(sneaker, btnCartRef, allSneakersSettings) {
+  console.log(sneaker);
   // Запоминаем исходное состояние
   const isAdded = sneaker.isAdded;
   // Блокируем кнопку чтобы клиент не спамил запросами
