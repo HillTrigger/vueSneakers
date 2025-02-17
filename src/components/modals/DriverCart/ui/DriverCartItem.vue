@@ -17,8 +17,12 @@ defineProps({
 });
 
 const emit = defineEmits(['addToCart']);
-
 const btnCartRef = ref(null);
+
+// const handleClick = () => {
+//   btnCartRef.value.disabled = true;
+//   console.log(btnCartRef); // Используй btnCartRef.value для доступа к элементу
+// };
 </script>
 
 <template>
@@ -30,10 +34,12 @@ const btnCartRef = ref(null);
       <p class="text-sm">{{ title }}</p>
       <span class="text-sm font-bold" n>{{ price.toLocaleString('ru-RU') + ' руб.' }}</span>
     </div>
-    <Cross
+    <button
       @click="() => emit('addToCart', btnCartRef)"
       ref="btnCartRef"
-      class="max-w-8 h-8 w-full text-white self-end cursor-pointer hover:text-gray-100"
-    />
+      class="max-w-8 h-8 self-end cursor-pointer w-full group"
+    >
+      <Cross class="text-white group-hover:text-gray-100" />
+    </button>
   </div>
 </template>

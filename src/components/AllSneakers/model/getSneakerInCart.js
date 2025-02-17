@@ -10,9 +10,7 @@ export async function getSneakerInCart(sneakers, allSneakersSettings) {
       return {
         ...sneaker,
         isAdded: true,
-        cartId: cartItem?.parentId,
+        cartId: cartItem?.id,
       };
     });
-
-  console.log(allSneakersSettings.cartItems);
 }

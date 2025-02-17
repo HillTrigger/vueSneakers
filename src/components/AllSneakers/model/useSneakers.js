@@ -6,6 +6,7 @@ import { sortSneakers } from './sortSneakers';
 import { getFavorites } from './getFavorites';
 import { getSneakerInCart } from './getSneakerInCart';
 import { getCartItemsId } from './getCartItemsId';
+import { updateDataFlags } from './updateFlags';
 
 export function useSneakers() {
   const allSneakersSettings = reactive({
@@ -26,20 +27,10 @@ export function useSneakers() {
       const favorites = await getFavorites();
       const addedCartItems = await getCartItemsId();
 
-      const newData = data.map((sneaker) => {
-        const favorite = favorites.find((favorite) => favorite.parentId === sneaker.id) || null;
-        const addedCartItem = addedCartItems.find((added) => added.parentId === sneaker.id) || null;
-        return {
-          ...sneaker,
-          favoriteId: favorite?.id,
-          isFavorite: !!favorite,
-          cartId: addedCartItem?.id,
-          isAdded: !!addedCartItem,
-        };
-      });
+      const newData = updateDataFlags(data, favorites, addedCartItems);
+
       allSneakersSettings.sneakersData = newData;
       allSneakersSettings.sneakersSorted = newData;
-      // allSneakersSettings.cartItems = data;
 
       await getSneakerInCart(data, allSneakersSettings);
     } catch (err) {
@@ -61,6 +52,20 @@ export function useSneakers() {
     },
     { flush: 'post' },
   );
+
+  watch(
+    () => allSneakersSettings.cartItems,
+    async () => {
+      const favorites = await getFavorites();
+      const addedCartItems = await getCartItemsId();
+
+      const newData = updateDataFlags(allSneakersSettings.sneakersData, favorites, addedCartItems);
+
+      allSneakersSettings.sneakersData = newData;
+      allSneakersSettings.sneakersSorted = newData;
+    },
+  );
+
   return {
     allSneakersSettings,
   };

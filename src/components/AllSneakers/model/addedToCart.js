@@ -1,15 +1,11 @@
 import axios from 'axios';
 
 export async function addToCart(sneaker, btnCartRef, allSneakersSettings) {
-  console.log(sneaker);
-  // Запоминаем исходное состояние
-  const isAdded = sneaker.isAdded;
   // Блокируем кнопку чтобы клиент не спамил запросами
   btnCartRef.disabled = true;
   try {
     if (!sneaker.isAdded) {
       // Сразу меняем состояние кнопки для лучшего UX опыта
-      sneaker.isAdded = true;
       const newCartItem = {
         parentId: sneaker.id,
       };
@@ -19,8 +15,8 @@ export async function addToCart(sneaker, btnCartRef, allSneakersSettings) {
       allSneakersSettings.cartItems = [...allSneakersSettings.cartItems, sneaker];
       // Запоминаем id чтобы потом легко удалить его с бэка
       sneaker.cartId = data.id;
+      sneaker.isAdded = true;
     } else {
-      sneaker.isAdded = false;
       const response = await axios.delete(
         `https://72f7c776150d43f2.mokky.dev/order/${sneaker.cartId}`,
       );
@@ -32,13 +28,12 @@ export async function addToCart(sneaker, btnCartRef, allSneakersSettings) {
 
         // Убираю cartId т.к. sneaker уже не корзине
         sneaker.cartId = null;
+        sneaker.isAdded = false;
       } else {
         console.error('Ошибка удаления избранного:', response);
       }
     }
   } catch (err) {
-    // В случае ошибки возвращаем исходное состояние
-    sneaker.isAdded = isAdded;
     console.error('Ошибка при запросе:', err);
   } finally {
     // При любом исходе разблокируем кнопку
