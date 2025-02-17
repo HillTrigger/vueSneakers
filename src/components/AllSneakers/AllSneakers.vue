@@ -21,7 +21,7 @@ const { driverCartState } = inject('driverCartActions');
     <transition name="driverCart">
       <DriverCart
         v-if="driverCartState"
-        :cartItems="allSneakersSettings.cartItems"
+        :cartItems="allSneakersSettings.cartData.cartItems"
         @addToCart="(sneaker, btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
       />
     </transition>

@@ -12,7 +12,7 @@ export async function addToCart(sneaker, btnCartRef, allSneakersSettings) {
       const { data } = await axios.post('https://72f7c776150d43f2.mokky.dev/order', newCartItem);
 
       // Добавляем новый кроссовок в корзину
-      allSneakersSettings.cartItems = [...allSneakersSettings.cartItems, sneaker];
+      allSneakersSettings.cartData.cartItems = [...allSneakersSettings.cartData.cartItems, sneaker];
       // Запоминаем id чтобы потом легко удалить его с бэка
       sneaker.cartId = data.id;
       sneaker.isAdded = true;
@@ -22,7 +22,7 @@ export async function addToCart(sneaker, btnCartRef, allSneakersSettings) {
       );
       if (response.status === 200 || response.status === 204) {
         // Удаляю кроссовок из cartItems
-        allSneakersSettings.cartItems = allSneakersSettings.cartItems.filter(
+        allSneakersSettings.cartData.cartItems = allSneakersSettings.cartData.cartItems.filter(
           (cartItem) => sneaker.id !== cartItem.id,
         );
 

@@ -1,5 +1,5 @@
 <script setup lang="js">
-import AllSneakers from '../AllSneakers/AllSneakers.vue'
+import AllSneakers from '../AllSneakers/AllSneakers.vue';
 </script>
 
 <template>

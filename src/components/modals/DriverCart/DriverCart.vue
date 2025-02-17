@@ -17,7 +17,6 @@ defineProps({
 });
 
 const { driverCartClose } = inject('driverCartActions');
-
 const emit = defineEmits(['addToCart']);
 </script>
 

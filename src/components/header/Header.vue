@@ -7,8 +7,11 @@ import Controls from '@/components/header/ui/Controls.vue';
 import Control from '@/components/header/ui/Сontrol.vue';
 import HeaderLayout from '@/components/header/ui/HeaderLayout.vue';
 import { inject } from 'vue';
+import { useAllSneakersStore } from '@/App/js/storeAllSneakers';
 
 const { driverCartOpen } = inject('driverCartActions');
+
+const storeAllSneakers = useAllSneakersStore();
 </script>
 
 <template>
@@ -19,7 +22,9 @@ const { driverCartOpen } = inject('driverCartActions');
         <template #svg>
           <Basket />
         </template>
-        <template #text>1205 руб.</template>
+        <template #text>{{
+          storeAllSneakers.totalCartPrice.toLocaleString('ru-RU') + ' руб.'
+        }}</template>
       </Control>
       <Control>
         <template #svg>

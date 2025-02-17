@@ -7,12 +7,19 @@ import { getFavorites } from './getFavorites';
 import { getSneakerInCart } from './getSneakerInCart';
 import { getCartItemsId } from './getCartItemsId';
 import { updateDataFlags } from './updateFlags';
+import { updateTotalCartPrice } from './updateTotalCartPrice';
+import { useAllSneakersStore } from '@/App/js/storeAllSneakers';
 
 export function useSneakers() {
+  const { updateStoreCartPrice } = useAllSneakersStore();
+
   const allSneakersSettings = reactive({
     sneakersData: [],
     sneakersSorted: [],
-    cartItems: [],
+    cartData: {
+      cartTotalPrice: 0,
+      cartItems: [],
+    },
     searchQuery: '',
     sortBy: {
       name: sortMethods.sortByDefault,
@@ -54,7 +61,7 @@ export function useSneakers() {
   );
 
   watch(
-    () => allSneakersSettings.cartItems,
+    () => allSneakersSettings.cartData.cartItems,
     async () => {
       const favorites = await getFavorites();
       const addedCartItems = await getCartItemsId();
@@ -63,6 +70,10 @@ export function useSneakers() {
 
       allSneakersSettings.sneakersData = newData;
       allSneakersSettings.sneakersSorted = newData;
+
+      updateTotalCartPrice(allSneakersSettings);
+      updateStoreCartPrice(allSneakersSettings.cartData.cartTotalPrice);
+      console.log(allSneakersSettings.cartData.cartTotalPrice);
     },
   );
 

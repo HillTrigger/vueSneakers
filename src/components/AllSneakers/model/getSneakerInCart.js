@@ -1,9 +1,10 @@
 import { getCartItemsId } from './getCartItemsId';
+import { updateTotalCartPrice } from './updateTotalCartPrice';
 
 export async function getSneakerInCart(sneakers, allSneakersSettings) {
   const cartItemsId = await getCartItemsId();
 
-  allSneakersSettings.cartItems = sneakers
+  allSneakersSettings.cartData.cartItems = sneakers
     .filter((sneaker) => cartItemsId.some((cartItem) => sneaker.id === cartItem.parentId))
     .map((sneaker) => {
       const cartItem = cartItemsId.find((cartItem) => sneaker.id === cartItem.parentId);
@@ -13,4 +14,6 @@ export async function getSneakerInCart(sneakers, allSneakersSettings) {
         cartId: cartItem?.id,
       };
     });
+
+  updateTotalCartPrice(allSneakersSettings);
 }
