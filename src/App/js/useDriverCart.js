@@ -6,7 +6,8 @@ export function useDriverCart() {
   function driverCartOpen() {
     driverCartState.value = true;
   }
-  function driverCartClose() {
+  function driverCartClose(e) {
+    if (e.target !== e.currentTarget) return;
     driverCartState.value = false;
   }
 

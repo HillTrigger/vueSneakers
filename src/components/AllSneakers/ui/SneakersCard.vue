@@ -1,9 +1,10 @@
 <script setup lang="js">
+import { ref } from 'vue';
+
 import Plus from '@/assets/Plus.svg';
 import Checked from '@/assets/Checked.svg';
 import LikeOff from '@/assets/like-1.svg';
 import LikeOn from '@/assets/like-2.svg';
-import { ref } from 'vue';
 defineProps({
   imageUrl: {
     type: String,
@@ -26,8 +27,9 @@ defineProps({
   },
 });
 
-const emit = defineEmits(['favoriteToggle']);
+const emit = defineEmits(['favoriteToggle', 'addToCart']);
 const likeRef = ref(null);
+const btnCartRef = ref(null);
 </script>
 
 <template>
@@ -50,7 +52,7 @@ const likeRef = ref(null);
         <span class="text-xs text-[#BDBDBD]">ЦЕНА:</span>
         <span class="text-sm font-bold">{{ price.toLocaleString('ru-RU') + ' руб.' }}</span>
       </div>
-      <button class="cursor-pointer">
+      <button ref="btnCartRef" @click="() => emit('addToCart', btnCartRef)" class="cursor-pointer">
         <Checked v-if="isAdded" />
         <Plus v-else class="text-white hover:text-gray-100" />
       </button>

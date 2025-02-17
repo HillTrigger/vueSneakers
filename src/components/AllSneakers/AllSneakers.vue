@@ -9,6 +9,7 @@ import SneakersCard from './ui/SneakersCard.vue';
 import { useSneakers } from './model/useSneakers';
 import { handleSortChange } from './model/handleSortChange';
 import DriverCart from '../modals/DriverCart/DriverCart.vue';
+import { addToCart } from './model/addedToCart';
 
 const { allSneakersSettings } = useSneakers();
 
@@ -38,6 +39,7 @@ const { driverCartState } = inject('driverCartActions');
         :isAdded="sneaker.isAdded"
         :isFavorite="sneaker.isFavorite"
         @favoriteToggle="(likeRef) => favoriteToggle(sneaker, likeRef)"
+        @addToCart="(btnCartRef) => addToCart(sneaker, btnCartRef)"
       />
     </AllSneakersMain>
   </AllSneakersLayout>

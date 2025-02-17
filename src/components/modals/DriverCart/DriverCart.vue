@@ -13,7 +13,7 @@ const { driverCartClose } = inject('driverCartActions');
 </script>
 
 <template>
-  <DriverCartLayout @click="driverCartClose">
+  <DriverCartLayout @driverCartClose="driverCartClose">
     <DriverCartModalBody>
       <DriverCartTop @click="driverCartClose"><Arrow />Корзина</DriverCartTop>
       <DriverCartMain>

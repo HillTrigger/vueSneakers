@@ -4,6 +4,7 @@ import { searchSneakers } from './searchSneakers';
 import { sortMethods, sortOrder } from '../constans';
 import { sortSneakers } from './sortSneakers';
 import { getFavorites } from './getFavorites';
+import { getCartItems } from './getCartItems';
 
 export function useSneakers() {
   const allSneakersSettings = reactive({
@@ -21,16 +22,18 @@ export function useSneakers() {
     try {
       const { data } = await axios('https://72f7c776150d43f2.mokky.dev/items');
       const favorites = await getFavorites();
+      const addedCartItems = await getCartItems();
 
       const newData = data.map((sneaker) => {
-        const favorite = favorites.find((favorite) => favorite.parentId === sneaker.id);
-
-        if (!favorite) return sneaker;
+        const favorite = favorites.find((favorite) => favorite.parentId === sneaker.id) || null;
+        const addedCartItem = addedCartItems.find((added) => added.parentId === sneaker.id) || null;
 
         return {
           ...sneaker,
-          isFavorite: true,
-          favoriteId: favorite.id,
+          favoriteId: favorite?.id,
+          isFavorite: !!favorite,
+          cartId: addedCartItem?.id,
+          isAdded: !!addedCartItem,
         };
       });
       allSneakersSettings.sneakersData = newData;
