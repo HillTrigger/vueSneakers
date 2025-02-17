@@ -9,6 +9,13 @@ import DriverCartTop from './ui/DriverCartTop.vue';
 import Arrow from './ui/icons/Arrow.vue';
 import DriverCartModalBody from './ui/DriverCartModalBody.vue';
 
+defineProps({
+  cartItems: {
+    type: Array,
+    default: [],
+  },
+});
+
 const { driverCartClose } = inject('driverCartActions');
 </script>
 
@@ -17,13 +24,13 @@ const { driverCartClose } = inject('driverCartActions');
     <DriverCartModalBody>
       <DriverCartTop @click="driverCartClose"><Arrow />Корзина</DriverCartTop>
       <DriverCartMain>
-        <!-- <DriverCartItem
-        v-for="sneaker in sneakersData"
-        :key="sneaker.id"
-        :imageUrl="sneaker.imageUrl"
-        :title="sneaker.title"
-        :price="sneaker.price"
-      /> -->
+        <DriverCartItem
+          v-for="sneaker in cartItems"
+          :key="sneaker.id"
+          :imageUrl="sneaker.imageUrl"
+          :title="sneaker.title"
+          :price="sneaker.price"
+        />
       </DriverCartMain>
       <DriverCartBottom>Низ</DriverCartBottom>
     </DriverCartModalBody>

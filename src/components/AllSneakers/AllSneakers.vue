@@ -19,7 +19,7 @@ const { driverCartState } = inject('driverCartActions');
 <template>
   <Teleport to="body">
     <transition name="driverCart">
-      <DriverCart v-if="driverCartState" />
+      <DriverCart v-if="driverCartState" :cartItems="allSneakersSettings.cartItems" />
     </transition>
   </Teleport>
   <AllSneakersLayout>
@@ -39,7 +39,7 @@ const { driverCartState } = inject('driverCartActions');
         :isAdded="sneaker.isAdded"
         :isFavorite="sneaker.isFavorite"
         @favoriteToggle="(likeRef) => favoriteToggle(sneaker, likeRef)"
-        @addToCart="(btnCartRef) => addToCart(sneaker, btnCartRef)"
+        @addToCart="(btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
       />
     </AllSneakersMain>
   </AllSneakersLayout>
