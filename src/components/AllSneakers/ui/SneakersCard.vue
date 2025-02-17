@@ -3,7 +3,7 @@ import Plus from '@/assets/Plus.svg';
 import Checked from '@/assets/Checked.svg';
 import LikeOff from '@/assets/like-1.svg';
 import LikeOn from '@/assets/like-2.svg';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 defineProps({
   imageUrl: {
     type: String,

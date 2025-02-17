@@ -1,0 +1,40 @@
+.driverCart-enter-from {
+  opacity: 0;
+}
+.driverCart-enter-to {
+  opacity: 1;
+}
+.driverCart-enter-active {
+  transition: opacity 0.8s;
+}
+
+.driverCart-leave-from {
+  opacity: 1;
+}
+.driverCart-leave-to {
+  opacity: 0;
+}
+.driverCart-leave-active {
+  transition: opacity 0.8s;
+}
+
+/* ======================= */
+.driverCart-enter-from .driverCartBody {
+  transform: translateX(100%);
+}
+.driverCart-enter-to .driverCartBody {
+  transform: none;
+}
+.driverCart-enter-active .driverCartBody {
+  transition: transform 0.5s;
+}
+
+.driverCart-leave-from .driverCartBody {
+  transform: none;
+}
+.driverCart-leave-to .driverCartBody {
+  transform: translateX(100%);
+}
+.driverCart-leave-active .driverCartBody {
+  transition: transform 0.5s;
+}

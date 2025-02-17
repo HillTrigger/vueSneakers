@@ -1,5 +1,4 @@
 <script setup lang="js">
-import { defineEmits } from 'vue';
 import Search from '@/assets/search.svg';
 import { sortMethods } from '../constans';
 

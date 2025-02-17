@@ -17,7 +17,7 @@ const { driverCartState } = inject('driverCartActions');
 
 <template>
   <Teleport to="body">
-    <transition name="fade">
+    <transition name="driverCart">
       <DriverCart v-if="driverCartState" />
     </transition>
   </Teleport>
