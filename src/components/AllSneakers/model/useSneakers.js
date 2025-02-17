@@ -73,7 +73,6 @@ export function useSneakers() {
 
       updateTotalCartPrice(allSneakersSettings);
       updateStoreCartPrice(allSneakersSettings.cartData.cartTotalPrice);
-      console.log(allSneakersSettings.cartData.cartTotalPrice);
     },
   );
 

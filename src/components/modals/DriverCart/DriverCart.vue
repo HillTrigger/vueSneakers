@@ -14,6 +14,9 @@ defineProps({
     type: Array,
     default: [],
   },
+  cartTotalPrice: {
+    type: Number,
+  },
 });
 
 const { driverCartClose } = inject('driverCartActions');
@@ -34,7 +37,7 @@ const emit = defineEmits(['addToCart']);
           @addToCart="(btnCartRef) => emit('addToCart', sneaker, btnCartRef)"
         />
       </DriverCartMain>
-      <DriverCartBottom>Низ</DriverCartBottom>
+      <DriverCartBottom :cartTotalPrice="cartTotalPrice" />
     </DriverCartModalBody>
   </DriverCartLayout>
 </template>

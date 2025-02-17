@@ -1,16 +1,12 @@
 <script setup lang="js">
-import UiButton from '@/components/uikit/UiButton.vue'
+import UiButton from '@/components/uikit/UiButton.vue';
 
 defineProps({
-  total: {
+  cartTotalPrice: {
     type: Number,
     default: 21498,
   },
-  tax: {
-    type: Number,
-    default: 1074,
-  },
-})
+});
 </script>
 
 <template>
@@ -18,12 +14,14 @@ defineProps({
     <div class="flex">
       <span>Итого:</span>
       <div class="grow border-b-2 border-dotted mx-2"></div>
-      <span class="font-semibold">{{ total.toLocaleString('ru-RU') + ' руб.' }}</span>
+      <span class="font-semibold">{{ cartTotalPrice.toLocaleString('ru-RU') + ' руб.' }}</span>
     </div>
     <div class="flex">
       <span>Налог 5%:</span>
       <div class="grow border-b-2 border-dotted mx-2"></div>
-      <span class="font-semibold">{{ tax.toLocaleString('ru-RU') + ' руб.' }}</span>
+      <span class="font-semibold">{{
+        (cartTotalPrice * 0.05).toLocaleString('ru-RU') + ' руб.'
+      }}</span>
     </div>
     <UiButton />
   </div>
