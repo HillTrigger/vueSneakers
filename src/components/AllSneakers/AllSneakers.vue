@@ -26,6 +26,7 @@ const storeAllSneakers = useAllSneakersStore();
     <transition name="driverCart">
       <DriverCart
         v-if="driverCartState"
+        :isEmpty="allSneakersSettings.cartData.cartItems.length === 0"
         :cartTotalPrice="storeAllSneakers.totalCartPrice"
         :cartItems="getCartItems(allSneakersSettings.sneakersData, allSneakersSettings.cartData)"
         @addToCart="(sneaker, btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"

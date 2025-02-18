@@ -63,11 +63,11 @@ export function useSneakers() {
       );
 
       const sum = getTotalCartPrice(cartItems, allSneakersSettings.cartData);
+
       updateStoreCartPrice(sum);
-      // updateDataFlags(allSneakersSettings.sneakersData, [], allSneakersSettings.cartData);
+
       setCartItemsToLocalStorage(allSneakersSettings.cartData);
     },
-    { deep: true },
   );
 
   return {
