@@ -3,7 +3,14 @@ export function searchSneakers(sneakersData, inputValue) {
     console.log('sneakersData отсутствует!!!');
     return null;
   }
-  return sneakersData.filter((sneaker) => {
-    return sneaker.title.toLowerCase().includes(inputValue.toLowerCase());
+
+  const searchArray = sneakersData.map((sneaker) => {
+    const isSearchItem = sneaker.title.toLowerCase().includes(inputValue.toLowerCase());
+    if (!isSearchItem) {
+      return { ...sneaker, isHidden: true };
+    } else {
+      return { ...sneaker, isHidden: false };
+    }
   });
+  return searchArray;
 }

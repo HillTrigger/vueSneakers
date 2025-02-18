@@ -10,20 +10,12 @@ import { useSneakers } from './model/useSneakers';
 import { handleSortChange } from './model/handleSortChange';
 import DriverCart from '../modals/DriverCart/DriverCart.vue';
 import { addToCart } from './model/addedToCart';
+import { getCartItems } from './model/getCartItems';
+import { getSearchedArray } from './model/getSearchedArray';
 
 const { allSneakersSettings } = useSneakers();
 
 const { driverCartState } = inject('driverCartActions');
-
-function getCartItems(sneakersData, cartItems) {
-  // Фильтруем объекты, оставляем только те, чьи id есть в cartItems
-  const filteredSneakers = sneakersData.filter((sneaker) => cartItems.includes(sneaker.id));
-
-  // Сортируем отфильтрованные объекты по порядку id в cartItems
-  return filteredSneakers.sort((a, b) => {
-    return cartItems.indexOf(a.id) - cartItems.indexOf(b.id);
-  });
-}
 </script>
 
 <template>
@@ -47,7 +39,7 @@ function getCartItems(sneakersData, cartItems) {
     />
     <AllSneakersMain>
       <SneakersCard
-        v-for="sneaker in allSneakersSettings.sneakersData"
+        v-for="sneaker in getSearchedArray(allSneakersSettings.sneakersData)"
         :key="sneaker.id"
         :id="sneaker.id"
         :imageUrl="sneaker.imageUrl"

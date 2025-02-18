@@ -4,8 +4,6 @@ import { searchSneakers } from './searchSneakers';
 import { sortMethods, sortOrder } from '../constans';
 import { sortSneakers } from './sortSneakers';
 import { getFavorites } from './getFavorites';
-import { getSneakerInCart } from './getSneakerInCart';
-import { getCartItemsId } from './getCartItemsId';
 import { updateDataFlags } from './updateFlags';
 import { updateTotalCartPrice } from './updateTotalCartPrice';
 import { useAllSneakersStore } from '@/App/js/storeAllSneakers';

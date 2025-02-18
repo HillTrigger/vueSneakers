@@ -1,4 +1,4 @@
-import { getCartItemsId } from './getCartItemsId';
+import { getCartItemsId } from './getCartItems';
 import { updateTotalCartPrice } from './updateTotalCartPrice';
 
 export async function getSneakerInCart(sneakers, allSneakersSettings) {

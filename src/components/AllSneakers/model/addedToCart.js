@@ -15,3 +15,5 @@ export function addToCart(sneaker, btnCartRef, allSneakersSettings) {
   }
   console.log(allSneakersSettings.cartData.cartItems);
 }
+
+function updateCartTotalPrice() {}
