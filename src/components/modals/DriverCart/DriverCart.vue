@@ -38,7 +38,10 @@ const emit = defineEmits(['addToCart', 'createOrder']);
           @addToCart="(btnCartRef) => emit('addToCart', sneaker, btnCartRef)"
         />
       </DriverCartMain>
-      <DriverCartBottom @createOrder="emit('createOrder')" :cartTotalPrice="cartTotalPrice" />
+      <DriverCartBottom
+        @createOrder="(isFormActive) => emit('createOrder', isFormActive)"
+        :cartTotalPrice="cartTotalPrice"
+      />
     </DriverCartModalBody>
   </DriverCartLayout>
 </template>

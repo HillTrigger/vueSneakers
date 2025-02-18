@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-export async function createOrder(allSneakersSettings, storeAllSneakers) {
+export async function createOrder(allSneakersSettings, storeAllSneakers, isFormActive) {
+  console.log('111');
+  isFormActive.value = false;
+  if (allSneakersSettings.cartData.cartItems.length <= 0) {
+    isFormActive.value = true;
+    return;
+  }
+
   console.log(allSneakersSettings.cartData.cartItems, storeAllSneakers.totalCartPrice);
   try {
     const newOrder = {
@@ -18,5 +25,7 @@ export async function createOrder(allSneakersSettings, storeAllSneakers) {
     return data;
   } catch (err) {
     console.log(err);
+  } finally {
+    isFormActive.value = true;
   }
 }

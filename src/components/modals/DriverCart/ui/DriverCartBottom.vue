@@ -1,5 +1,6 @@
 <script setup lang="js">
 import UiButton from '@/components/uikit/UiButton.vue';
+import { ref } from 'vue';
 
 defineProps({
   cartTotalPrice: {
@@ -9,6 +10,13 @@ defineProps({
 });
 
 const emit = defineEmits(['createOrder']);
+
+// Функция для передачи isFormActive как ref в createOrder
+const handleCreateOrder = () => {
+  // Передаем сам ref, а не его значение
+  emit('createOrder', isFormActive);
+};
+const isFormActive = ref(true);
 </script>
 
 <template>
@@ -25,6 +33,6 @@ const emit = defineEmits(['createOrder']);
         (cartTotalPrice * 0.05).toLocaleString('ru-RU') + ' руб.'
       }}</span>
     </div>
-    <UiButton @click="emit('createOrder')" />
+    <UiButton @click="handleCreateOrder" :disabled="!isFormActive" />
   </div>
 </template>

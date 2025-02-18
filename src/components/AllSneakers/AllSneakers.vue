@@ -29,7 +29,9 @@ const storeAllSneakers = useAllSneakersStore();
         :cartTotalPrice="storeAllSneakers.totalCartPrice"
         :cartItems="getCartItems(allSneakersSettings.sneakersData, allSneakersSettings.cartData)"
         @addToCart="(sneaker, btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
-        @createOrder="() => createOrder(allSneakersSettings, storeAllSneakers)"
+        @createOrder="
+          (isFormActive) => createOrder(allSneakersSettings, storeAllSneakers, isFormActive)
+        "
       />
     </transition>
   </Teleport>
