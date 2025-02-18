@@ -5,9 +5,10 @@ import { sortMethods, sortOrder } from '../constans';
 import { sortSneakers } from './sortSneakers';
 import { getFavorites } from './getFavorites';
 import { updateDataFlags } from './updateFlags';
-import { updateTotalCartPrice } from './updateTotalCartPrice';
+import { getTotalCartPrice } from './updateTotalCartPrice';
 import { useAllSneakersStore } from '@/App/js/storeAllSneakers';
 import { getCartItems } from './getCartItems';
+import { getCartItemsFromLocalStorage, setCartItemsToLocalStorage } from './cartItemsLocalStorage';
 
 export function useSneakers() {
   const { updateStoreCartPrice } = useAllSneakersStore();
@@ -15,7 +16,6 @@ export function useSneakers() {
   const allSneakersSettings = reactive({
     sneakersData: [],
     cartData: {
-      cartTotalPrice: 0,
       cartItems: [],
     },
     searchQuery: '',
@@ -30,13 +30,13 @@ export function useSneakers() {
     try {
       const { data } = await axios('https://72f7c776150d43f2.mokky.dev/items');
       const favorites = await getFavorites();
-      // const addedCartItems = await getCartItemsId();
 
-      const newData = updateDataFlags(data, favorites);
+      allSneakersSettings.cartData = getCartItemsFromLocalStorage(allSneakersSettings.cartData);
+      console.log(allSneakersSettings.cartData);
+
+      const newData = updateDataFlags(data, favorites, allSneakersSettings.cartData);
 
       allSneakersSettings.sneakersData = newData;
-
-      // await getSneakerInCart(data, allSneakersSettings);
     } catch (err) {
       console.log(err);
     }
@@ -61,14 +61,11 @@ export function useSneakers() {
         allSneakersSettings.sneakersData,
         allSneakersSettings.cartData,
       );
-      updateTotalCartPrice(cartItems, allSneakersSettings.cartData);
-      // const favorites = await getFavorites();
-      // const newData = updateDataFlags(allSneakersSettings.sneakersData, favorites);
-      // allSneakersSettings.sneakersData = newData;
-      // allSneakersSettings.sneakersSorted = newData;
-      // updateTotalCartPrice(allSneakersSettings);
-      updateStoreCartPrice(allSneakersSettings.cartData.cartTotalPrice);
-      console.log(allSneakersSettings.cartData.cartTotalPrice);
+
+      const sum = getTotalCartPrice(cartItems, allSneakersSettings.cartData);
+      updateStoreCartPrice(sum);
+
+      setCartItemsToLocalStorage(allSneakersSettings.cartData);
     },
   );
 
