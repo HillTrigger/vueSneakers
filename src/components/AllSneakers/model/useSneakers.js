@@ -32,8 +32,8 @@ export function useSneakers() {
       const favorites = await getFavorites();
 
       allSneakersSettings.cartData = getCartItemsFromLocalStorage(allSneakersSettings.cartData);
-      console.log(allSneakersSettings.cartData);
-
+      // console.log(allSneakersSettings.cartData);
+      // console.log(favorites);
       const newData = updateDataFlags(data, favorites, allSneakersSettings.cartData);
 
       allSneakersSettings.sneakersData = newData;
@@ -64,9 +64,10 @@ export function useSneakers() {
 
       const sum = getTotalCartPrice(cartItems, allSneakersSettings.cartData);
       updateStoreCartPrice(sum);
-
+      // updateDataFlags(allSneakersSettings.sneakersData, [], allSneakersSettings.cartData);
       setCartItemsToLocalStorage(allSneakersSettings.cartData);
     },
+    { deep: true },
   );
 
   return {

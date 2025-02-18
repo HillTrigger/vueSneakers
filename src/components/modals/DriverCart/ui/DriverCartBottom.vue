@@ -7,6 +7,8 @@ defineProps({
     default: 21498,
   },
 });
+
+const emit = defineEmits(['createOrder']);
 </script>
 
 <template>
@@ -23,6 +25,6 @@ defineProps({
         (cartTotalPrice * 0.05).toLocaleString('ru-RU') + ' руб.'
       }}</span>
     </div>
-    <UiButton />
+    <UiButton @click="emit('createOrder')" />
   </div>
 </template>

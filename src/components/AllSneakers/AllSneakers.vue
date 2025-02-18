@@ -13,9 +13,9 @@ import { addToCart } from './model/addedToCart';
 import { getCartItems } from './model/getCartItems';
 import { getSearchedArray } from './model/getSearchedArray';
 import { useAllSneakersStore } from '@/App/js/storeAllSneakers';
+import { createOrder } from './model/createOrder';
 
 const { allSneakersSettings } = useSneakers();
-
 const { driverCartState } = inject('driverCartActions');
 
 const storeAllSneakers = useAllSneakersStore();
@@ -29,6 +29,7 @@ const storeAllSneakers = useAllSneakersStore();
         :cartTotalPrice="storeAllSneakers.totalCartPrice"
         :cartItems="getCartItems(allSneakersSettings.sneakersData, allSneakersSettings.cartData)"
         @addToCart="(sneaker, btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
+        @createOrder="() => createOrder(allSneakersSettings, storeAllSneakers)"
       />
     </transition>
   </Teleport>

@@ -21,7 +21,7 @@ defineProps({
 });
 
 const { driverCartClose } = inject('driverCartActions');
-const emit = defineEmits(['addToCart']);
+const emit = defineEmits(['addToCart', 'createOrder']);
 </script>
 
 <template>
@@ -38,7 +38,7 @@ const emit = defineEmits(['addToCart']);
           @addToCart="(btnCartRef) => emit('addToCart', sneaker, btnCartRef)"
         />
       </DriverCartMain>
-      <DriverCartBottom :cartTotalPrice="cartTotalPrice" />
+      <DriverCartBottom @createOrder="emit('createOrder')" :cartTotalPrice="cartTotalPrice" />
     </DriverCartModalBody>
   </DriverCartLayout>
 </template>
