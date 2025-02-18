@@ -15,7 +15,6 @@ export function useSneakers() {
 
   const allSneakersSettings = reactive({
     sneakersData: [],
-    sneakersSorted: [],
     cartData: {
       cartTotalPrice: 0,
       cartItems: [],
@@ -32,14 +31,13 @@ export function useSneakers() {
     try {
       const { data } = await axios('https://72f7c776150d43f2.mokky.dev/items');
       const favorites = await getFavorites();
-      const addedCartItems = await getCartItemsId();
+      // const addedCartItems = await getCartItemsId();
 
-      const newData = updateDataFlags(data, favorites, addedCartItems);
+      const newData = updateDataFlags(data, favorites);
 
       allSneakersSettings.sneakersData = newData;
-      allSneakersSettings.sneakersSorted = newData;
 
-      await getSneakerInCart(data, allSneakersSettings);
+      // await getSneakerInCart(data, allSneakersSettings);
     } catch (err) {
       console.log(err);
     }
@@ -52,10 +50,7 @@ export function useSneakers() {
         allSneakersSettings.sneakersData,
         allSneakersSettings.searchQuery,
       );
-      allSneakersSettings.sneakersSorted = sortSneakers(
-        filteredSneakers,
-        allSneakersSettings.sortBy,
-      );
+      allSneakersSettings.sneakersData = sortSneakers(filteredSneakers, allSneakersSettings.sortBy);
     },
     { flush: 'post' },
   );
@@ -63,16 +58,12 @@ export function useSneakers() {
   watch(
     () => allSneakersSettings.cartData.cartItems,
     async () => {
-      const favorites = await getFavorites();
-      const addedCartItems = await getCartItemsId();
-
-      const newData = updateDataFlags(allSneakersSettings.sneakersData, favorites, addedCartItems);
-
-      allSneakersSettings.sneakersData = newData;
-      allSneakersSettings.sneakersSorted = newData;
-
-      updateTotalCartPrice(allSneakersSettings);
-      updateStoreCartPrice(allSneakersSettings.cartData.cartTotalPrice);
+      // const favorites = await getFavorites();
+      // const newData = updateDataFlags(allSneakersSettings.sneakersData, favorites);
+      // allSneakersSettings.sneakersData = newData;
+      // allSneakersSettings.sneakersSorted = newData;
+      // updateTotalCartPrice(allSneakersSettings);
+      // updateStoreCartPrice(allSneakersSettings.cartData.cartTotalPrice);
     },
   );
 

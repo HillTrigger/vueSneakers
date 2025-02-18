@@ -14,6 +14,16 @@ import { addToCart } from './model/addedToCart';
 const { allSneakersSettings } = useSneakers();
 
 const { driverCartState } = inject('driverCartActions');
+
+function getCartItems(sneakersData, cartItems) {
+  // Фильтруем объекты, оставляем только те, чьи id есть в cartItems
+  const filteredSneakers = sneakersData.filter((sneaker) => cartItems.includes(sneaker.id));
+
+  // Сортируем отфильтрованные объекты по порядку id в cartItems
+  return filteredSneakers.sort((a, b) => {
+    return cartItems.indexOf(a.id) - cartItems.indexOf(b.id);
+  });
+}
 </script>
 
 <template>
@@ -21,8 +31,10 @@ const { driverCartState } = inject('driverCartActions');
     <transition name="driverCart">
       <DriverCart
         v-if="driverCartState"
-        :cartTotalPrice="allSneakersSettings.cartData.cartTotalPrice"
-        :cartItems="allSneakersSettings.cartData.cartItems"
+        :cartTotalPrice="allSneakersSettings.cartTotalPrice"
+        :cartItems="
+          getCartItems(allSneakersSettings.sneakersData, allSneakersSettings.cartData.cartItems)
+        "
         @addToCart="(sneaker, btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
       />
     </transition>
@@ -35,7 +47,7 @@ const { driverCartState } = inject('driverCartActions');
     />
     <AllSneakersMain>
       <SneakersCard
-        v-for="sneaker in allSneakersSettings.sneakersSorted"
+        v-for="sneaker in allSneakersSettings.sneakersData"
         :key="sneaker.id"
         :id="sneaker.id"
         :imageUrl="sneaker.imageUrl"

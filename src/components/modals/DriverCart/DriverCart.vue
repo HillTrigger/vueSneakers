@@ -16,6 +16,7 @@ defineProps({
   },
   cartTotalPrice: {
     type: Number,
+    default: 0,
   },
 });
 

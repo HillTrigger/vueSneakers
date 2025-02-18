@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function getCartItemsId() {
   try {
-    const { data } = await axios('https://72f7c776150d43f2.mokky.dev/order');
+    const { data } = await axios('https://72f7c776150d43f2.mokky.dev/cartItems');
 
     return data;
   } catch (err) {
