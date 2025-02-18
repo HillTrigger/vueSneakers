@@ -42,7 +42,7 @@ const storeAllSneakers = useAllSneakersStore();
       v-model:filter="allSneakersSettings.sortBy"
       v-model:search="allSneakersSettings.searchQuery"
     />
-    <AllSneakersMain>
+    <AllSneakersMain v-auto-animate>
       <SneakersCard
         v-for="sneaker in getSearchedArray(allSneakersSettings.sneakersData)"
         :key="sneaker.id"

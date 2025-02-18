@@ -8,7 +8,7 @@ import DriverCartMain from './ui/DriverCartMain.vue';
 import DriverCartTop from './ui/DriverCartTop.vue';
 import Arrow from './ui/icons/Arrow.vue';
 import DriverCartModalBody from './ui/DriverCartModalBody.vue';
-import Infoblock from '@/components/infoBlock/infoblock.vue';
+import Infoblock from '@/components/infoBlock/InfoBlock.vue';
 
 defineProps({
   cartItems: {

@@ -4,5 +4,9 @@ import './css/index.css';
 import { createApp } from 'vue';
 import App from './App.vue';
 import { createPinia } from 'pinia';
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue';
 
-createApp(App).use(createPinia()).mount('#app');
+const app = createApp(App);
+app.use(createPinia());
+app.use(autoAnimatePlugin);
+app.mount('#app');
