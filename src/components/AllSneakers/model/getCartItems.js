@@ -1,9 +1,11 @@
-export function getCartItems(sneakersData, cartItems) {
+export function getCartItems(sneakersData, cartData) {
   // Фильтруем объекты, оставляем только те, чьи id есть в cartItems
-  const filteredSneakers = sneakersData.filter((sneaker) => cartItems.includes(sneaker.id));
+  const filteredSneakers = sneakersData.filter((sneaker) =>
+    cartData.cartItems.includes(sneaker.id),
+  );
 
   // Сортируем отфильтрованные объекты по порядку id в cartItems
   return filteredSneakers.sort((a, b) => {
-    return cartItems.indexOf(a.id) - cartItems.indexOf(b.id);
+    return cartData.cartItems.indexOf(a.id) - cartData.cartItems.indexOf(b.id);
   });
 }

@@ -7,6 +7,7 @@ import { getFavorites } from './getFavorites';
 import { updateDataFlags } from './updateFlags';
 import { updateTotalCartPrice } from './updateTotalCartPrice';
 import { useAllSneakersStore } from '@/App/js/storeAllSneakers';
+import { getCartItems } from './getCartItems';
 
 export function useSneakers() {
   const { updateStoreCartPrice } = useAllSneakersStore();
@@ -56,12 +57,18 @@ export function useSneakers() {
   watch(
     () => allSneakersSettings.cartData.cartItems,
     async () => {
+      const cartItems = getCartItems(
+        allSneakersSettings.sneakersData,
+        allSneakersSettings.cartData,
+      );
+      updateTotalCartPrice(cartItems, allSneakersSettings.cartData);
       // const favorites = await getFavorites();
       // const newData = updateDataFlags(allSneakersSettings.sneakersData, favorites);
       // allSneakersSettings.sneakersData = newData;
       // allSneakersSettings.sneakersSorted = newData;
       // updateTotalCartPrice(allSneakersSettings);
-      // updateStoreCartPrice(allSneakersSettings.cartData.cartTotalPrice);
+      updateStoreCartPrice(allSneakersSettings.cartData.cartTotalPrice);
+      console.log(allSneakersSettings.cartData.cartTotalPrice);
     },
   );
 

@@ -1,8 +1,5 @@
-export function updateTotalCartPrice(allSneakersSettings) {
-  allSneakersSettings.cartData.cartTotalPrice = allSneakersSettings.cartData.cartItems.reduce(
-    (sum, sneaker) => {
-      return sum + sneaker.price;
-    },
-    0,
-  );
+export function updateTotalCartPrice(filteredSneakers, cartData) {
+  cartData.cartTotalPrice = filteredSneakers.reduce((sum, sneaker) => {
+    return sum + sneaker.price;
+  }, 0);
 }

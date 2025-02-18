@@ -12,10 +12,13 @@ import DriverCart from '../modals/DriverCart/DriverCart.vue';
 import { addToCart } from './model/addedToCart';
 import { getCartItems } from './model/getCartItems';
 import { getSearchedArray } from './model/getSearchedArray';
+import { useAllSneakersStore } from '@/App/js/storeAllSneakers';
 
 const { allSneakersSettings } = useSneakers();
 
 const { driverCartState } = inject('driverCartActions');
+
+const storeAllSneakers = useAllSneakersStore();
 </script>
 
 <template>
@@ -23,10 +26,8 @@ const { driverCartState } = inject('driverCartActions');
     <transition name="driverCart">
       <DriverCart
         v-if="driverCartState"
-        :cartTotalPrice="allSneakersSettings.cartTotalPrice"
-        :cartItems="
-          getCartItems(allSneakersSettings.sneakersData, allSneakersSettings.cartData.cartItems)
-        "
+        :cartTotalPrice="storeAllSneakers.totalCartPrice"
+        :cartItems="getCartItems(allSneakersSettings.sneakersData, allSneakersSettings.cartData)"
         @addToCart="(sneaker, btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
       />
     </transition>
