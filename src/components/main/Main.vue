@@ -4,6 +4,6 @@ import AllSneakers from '../AllSneakers/AllSneakers.vue';
 
 <template>
   <div class="pb-20 pt-10">
-    <AllSneakers />
+    <slot></slot>
   </div>
 </template>

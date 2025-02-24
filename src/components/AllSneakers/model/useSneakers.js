@@ -11,13 +11,9 @@ import { getCartItems } from './getCartItems';
 import { getCartItemsFromLocalStorage, setCartItemsToLocalStorage } from './cartItemsLocalStorage';
 
 export function useSneakers() {
-  const { updateStoreCartPrice } = useAllSneakersStore();
+  // const { updateStoreCartPrice } = useAllSneakersStore();
 
   const allSneakersSettings = reactive({
-    sneakersData: [],
-    cartData: {
-      cartItems: [],
-    },
     searchQuery: '',
     sortBy: {
       name: sortMethods.sortByDefault,
@@ -32,8 +28,7 @@ export function useSneakers() {
       const favorites = await getFavorites();
 
       allSneakersSettings.cartData = getCartItemsFromLocalStorage(allSneakersSettings.cartData);
-      // console.log(allSneakersSettings.cartData);
-      // console.log(favorites);
+
       const newData = updateDataFlags(data, favorites, allSneakersSettings.cartData);
 
       allSneakersSettings.sneakersData = newData;
@@ -54,21 +49,21 @@ export function useSneakers() {
     { flush: 'post' },
   );
 
-  watch(
-    () => allSneakersSettings.cartData.cartItems,
-    async () => {
-      const cartItems = getCartItems(
-        allSneakersSettings.sneakersData,
-        allSneakersSettings.cartData,
-      );
+  // watch(
+  //   () => allSneakersSettings.cartData.cartItems,
+  //   async () => {
+  //     const cartItems = getCartItems(
+  //       allSneakersSettings.sneakersData,
+  //       allSneakersSettings.cartData,
+  //     );
 
-      const sum = getTotalCartPrice(cartItems, allSneakersSettings.cartData);
+  //     const sum = getTotalCartPrice(cartItems, allSneakersSettings.cartData);
 
-      updateStoreCartPrice(sum);
+  // updateStoreCartPrice(sum);
 
-      setCartItemsToLocalStorage(allSneakersSettings.cartData);
-    },
-  );
+  //     setCartItemsToLocalStorage(allSneakersSettings.cartData);
+  //   },
+  // );
 
   return {
     allSneakersSettings,

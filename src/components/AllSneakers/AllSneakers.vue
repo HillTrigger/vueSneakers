@@ -15,28 +15,14 @@ import { getSearchedArray } from './model/getSearchedArray';
 import { useAllSneakersStore } from '@/App/js/storeAllSneakers';
 import { createOrder } from './model/createOrder';
 
-const { allSneakersSettings } = useSneakers();
-const { driverCartState } = inject('driverCartActions');
+// const { allSneakersSettings } = useSneakers();
 
-const storeAllSneakers = useAllSneakersStore();
+// const storeAllSneakers = useAllSneakersStore();
 </script>
 
 <template>
-  <Teleport to="body">
-    <transition name="driverCart">
-      <DriverCart
-        v-if="driverCartState"
-        :isEmpty="allSneakersSettings.cartData.cartItems.length === 0"
-        :cartTotalPrice="storeAllSneakers.totalCartPrice"
-        :cartItems="getCartItems(allSneakersSettings.sneakersData, allSneakersSettings.cartData)"
-        @addToCart="(sneaker, btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
-        @createOrder="
-          (isFormActive) => createOrder(allSneakersSettings, storeAllSneakers, isFormActive)
-        "
-      />
-    </transition>
-  </Teleport>
-  <AllSneakersLayout>
+  <h2>все кроссовки</h2>
+  <!-- <AllSneakersLayout>
     <AllSneakersTop
       @handleSortChange="(e) => handleSortChange(allSneakersSettings, e)"
       v-model:filter="allSneakersSettings.sortBy"
@@ -56,5 +42,5 @@ const storeAllSneakers = useAllSneakersStore();
         @addToCart="(btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
       />
     </AllSneakersMain>
-  </AllSneakersLayout>
+  </AllSneakersLayout> -->
 </template>

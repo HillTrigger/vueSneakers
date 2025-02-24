@@ -1,25 +1,25 @@
 import axios from 'axios';
 
-export async function createOrder(allSneakersSettings, storeAllSneakers, isFormActive) {
+export async function createOrder(shopData, isFormActive) {
   console.log(isFormActive);
 
   isFormActive.value = false;
-  if (allSneakersSettings.cartData.cartItems.length <= 0) {
+  if (shopData.cartData.cartItems.length <= 0) {
     isFormActive.value = true;
     return;
   }
 
-  console.log(allSneakersSettings.cartData.cartItems, storeAllSneakers.totalCartPrice);
+  console.log(shopData.cartData.cartItems, shopData.cartData.totalCartPrice);
   try {
     const newOrder = {
-      items: [...allSneakersSettings.cartData.cartItems],
-      totalPrice: storeAllSneakers.totalCartPrice,
+      items: [...shopData.cartData.cartItems],
+      totalPrice: shopData.cartData.totalCartPrice,
     };
     const { data } = await axios.post('https://72f7c776150d43f2.mokky.dev/orders', newOrder);
 
-    storeAllSneakers.updateStoreCartPrice(0);
-    allSneakersSettings.cartData.cartItems.splice(0, allSneakersSettings.cartData.cartItems.length);
-    allSneakersSettings.sneakersData = allSneakersSettings.sneakersData.map((sneaker) => ({
+    shopData.cartData.totalCartPrice = 0;
+    shopData.cartData.cartItems.splice(0, shopData.cartData.cartItems.length);
+    shopData.sneakersData = shopData.sneakersData.map((sneaker) => ({
       ...sneaker,
       isAdded: false,
     }));

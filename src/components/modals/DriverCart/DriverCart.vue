@@ -25,17 +25,17 @@ defineProps({
   },
 });
 
-const { driverCartCloseOut, driverCartClose } = inject('driverCartActions');
-const emit = defineEmits(['addToCart', 'createOrder']);
+// const { driverCartCloseOut, driverCartClose } = inject('driverCartActions');
+const emit = defineEmits(['addToCart', 'createOrder', 'driverCartCloseOut', 'driverCartClose']);
 
 // const isEmpty = computed(() => cartItems.length === 0);
 // console.log(isEmpty);
 </script>
 
 <template>
-  <DriverCartLayout @driverCartClose="driverCartCloseOut">
+  <DriverCartLayout @driverCartClose="(e) => emit('driverCartCloseOut', e)">
     <DriverCartModalBody>
-      <DriverCartTop @click="driverCartClose"><Arrow />Корзина</DriverCartTop>
+      <DriverCartTop @click="emit('driverCartClose')"><Arrow />Корзина</DriverCartTop>
       <DriverCartMain v-if="!isEmpty">
         <DriverCartItem
           v-for="sneaker in cartItems"
@@ -47,7 +47,7 @@ const emit = defineEmits(['addToCart', 'createOrder']);
         />
       </DriverCartMain>
       <Infoblock
-        @driverCartClose="driverCartClose"
+        @driverCartClose="emit('driverCartClose')"
         title="Корзина пустая"
         desc="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
         imageUrl="/src/assets/package-icon.png"

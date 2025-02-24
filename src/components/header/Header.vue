@@ -9,28 +9,35 @@ import HeaderLayout from '@/components/header/ui/HeaderLayout.vue';
 import { inject } from 'vue';
 import { useAllSneakersStore } from '@/App/js/storeAllSneakers';
 
-const { driverCartOpen } = inject('driverCartActions');
+defineProps({
+  totalCartPrice: {
+    type: Number,
+    default: 0,
+  },
+});
 
-const storeAllSneakers = useAllSneakersStore();
+// const { driverCartOpen } = inject('driverCartActions');
+
+// const storeAllSneakers = useAllSneakersStore();
+
+const emit = defineEmits(['driverCartActions']);
 </script>
 
 <template>
   <HeaderLayout>
-    <Logo />
+    <RouterLink to="/"><Logo /></RouterLink>
     <Controls>
-      <Control isBold @click="driverCartOpen">
+      <Control isBold @click="emit('driverCartActions')">
         <template #svg>
           <Basket />
         </template>
-        <template #text>{{
-          storeAllSneakers.totalCartPrice.toLocaleString('ru-RU') + ' руб.'
-        }}</template>
+        <template #text>{{ totalCartPrice.toLocaleString('ru-RU') + ' руб.' }}</template>
       </Control>
       <Control>
         <template #svg>
           <Heart />
         </template>
-        <template #text>Закладки</template>
+        <template #text><RouterLink to="/favorites">Закладки</RouterLink></template>
       </Control>
       <Control>
         <template #svg>
