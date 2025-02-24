@@ -21,7 +21,7 @@ import { createOrder } from './model/createOrder';
 </script>
 
 <template>
-  <h2>все кроссовки</h2>
+  <h2>все носки</h2>
   <!-- <AllSneakersLayout>
     <AllSneakersTop
       @handleSortChange="(e) => handleSortChange(allSneakersSettings, e)"
