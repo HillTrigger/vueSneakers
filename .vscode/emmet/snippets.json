@@ -1,0 +1,7 @@
+{
+  "html": {
+    "snippets": {
+      "myimg": "<img src=\"${1:url}\" alt=\"${2:description}\">"
+    }
+  }
+}

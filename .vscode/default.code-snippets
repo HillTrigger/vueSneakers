@@ -1,0 +1,9 @@
+{
+  "SCSS Button Styling": {
+    "prefix": "rem",  // Префикс для активации сниппета
+    "body": [
+      "rem($1)"
+    ],
+    "description": "Create a basic button style in SCSS"
+  }
+}
