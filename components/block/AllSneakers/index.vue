@@ -20,6 +20,7 @@ onMounted(async () => {
       @handle-sort-change="(e) => handleSortChange(allSneakersSettings, e)"
     /> -->
     <AllSneakersMain >
+      <BaseLoading  v-if="items.length == 0" class="col-span-full "/>
       <BaseSneakersCard
         v-for="sneaker in items"
         :id="sneaker.id"
@@ -30,7 +31,6 @@ onMounted(async () => {
         :is-added="sneaker.isAdded"
         :is-favorite="sneaker.isFavorite" 
       />
-      <BaseSneakersCard/>
       <!-- <SneakersCard
         v-for="sneaker in getSneakersList()"
         :id="sneaker.id"
