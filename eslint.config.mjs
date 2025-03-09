@@ -19,7 +19,7 @@ export default withNuxt({
   },
   rules: {
     // 🚨 Общие ошибки
-    'no-console': 'warn', // Разрешить console.log, но с предупреждением
+    'no-console': 'off', // Разрешить console.log
     'no-debugger': 'error', // Запрет debugger в продакшене
     eqeqeq: ['error', 'always'], // Строгое сравнение ===
     curly: ['error', 'all'], // Всегда фигурные скобки в if, while, for

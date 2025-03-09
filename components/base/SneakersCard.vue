@@ -36,7 +36,7 @@ defineProps({
 
 <template>
   <div
-    class="p-8 pt-5 border-[#F3F3F3] border-2 rounded-3xl flex flex-col relative hover:border-gray-300 transition-transform cursor-pointer"
+    class="p-8 pt-5 min-w-52 border-[#F3F3F3] border-2 rounded-3xl flex flex-col relative hover:border-gray-300 transition-transform cursor-pointer"
   >
     <img class="pointer-events-none max-w-36"  :src="imageUrl" alt="sneaker">
     <h5 class="text-sm mb-3.5">{{ title }}</h5>

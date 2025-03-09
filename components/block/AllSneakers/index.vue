@@ -1,8 +1,15 @@
-<script setup lang="ts">
+<script setup lang="js">
+import { getSneakersList } from './model/getSneakersList';
 import AllSneakersLayout from './ui/AllSneakersLayout.vue';
 import AllSneakersMain from './ui/AllSneakersMain.vue';
 import AllSneakersTop from './ui/AllSneakersTop.vue';
 
+const items = ref([]);
+
+
+onMounted(async () => {
+	items.value = await getSneakersList();
+});
 </script>
 <template>
   <AllSneakersLayout>
@@ -13,10 +20,19 @@ import AllSneakersTop from './ui/AllSneakersTop.vue';
       @handle-sort-change="(e) => handleSortChange(allSneakersSettings, e)"
     /> -->
     <AllSneakersMain >
-      <!-- <BaseSneakersCard/> -->
+      <BaseSneakersCard
+        v-for="sneaker in items"
+        :id="sneaker.id"
+        :key="sneaker.id"
+        :image-url="sneaker.imageUrl"
+        :title="sneaker.title"
+        :price="sneaker.price"
+        :is-added="sneaker.isAdded"
+        :is-favorite="sneaker.isFavorite" 
+      />
       <BaseSneakersCard/>
       <!-- <SneakersCard
-        v-for="sneaker in getSearchedArray(allSneakersSettings.sneakersData)"
+        v-for="sneaker in getSneakersList()"
         :id="sneaker.id"
         :key="sneaker.id"
         :image-url="sneaker.imageUrl"
@@ -24,8 +40,6 @@ import AllSneakersTop from './ui/AllSneakersTop.vue';
         :price="sneaker.price"
         :is-added="sneaker.isAdded"
         :is-favorite="sneaker.isFavorite"
-        @favorite-toggle="(likeRef) => favoriteToggle(sneaker, likeRef)"
-        @add-to-cart="(btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
       /> -->
     </AllSneakersMain>
   </AllSneakersLayout>
