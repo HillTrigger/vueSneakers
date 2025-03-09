@@ -1,6 +1,6 @@
-.container {
-  width: 100%;
-  max-width: 67.5rem;
-  padding: 0 3.75rem;
-  margin: 0 auto;
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
+

@@ -1,5 +1,5 @@
 <template>
-  <h1>Home</h1>
+  <BlockAllSneakers/>
 </template>
 <style lang="scss">
 </style>
