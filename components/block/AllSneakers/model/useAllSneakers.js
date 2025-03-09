@@ -1,12 +1,21 @@
 // import { getSneakersList } from './getSneakersList';
 
+import { sortMethods, sortOrder } from '../constans';
+
 import { getSneakersList } from './getSneakersList';
 import { searchSneakers } from './searchSneakers';
+import { sortSneakers } from './sortSneakers';
 
 export default function useAllSneakers() {
-	const items = [ref([])];
+	const items = ref([]);
 	const sortedItems = ref([]);
 	const searchInputText = ref('');
+
+	const sortBy = reactive({
+		name: sortMethods.sortByDefault,
+		[sortMethods.sortByDefault]: sortOrder.asc,
+		[sortMethods.sortByPrice]: sortOrder.asc,
+	});
 
 	onMounted(async () => {
 		const sneakersData = await getSneakersList(searchInputText);
@@ -15,9 +24,12 @@ export default function useAllSneakers() {
 		sortedItems.value = sneakersData;
 	});
 	
-	watch(searchInputText, async () => {
-		sortedItems.value = searchSneakers(items.value, searchInputText);
+	watch([searchInputText, sortBy], () => {
+		const sneakersData = searchSneakers(items.value, searchInputText);
+		sortedItems.value = sortSneakers(sneakersData, sortBy);
+	}, {
+		deep: true
 	});
 
-	return ({items, sortedItems, searchInputText});
+	return ({items, sortedItems, sortBy, searchInputText});
 }

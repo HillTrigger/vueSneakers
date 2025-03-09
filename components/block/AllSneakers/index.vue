@@ -1,21 +1,21 @@
 <script setup lang="js">
+import { handleSortChange } from './model/handleSortChange';
 import useAllSneakers from './model/useAllSneakers';
 import AllSneakersLayout from './ui/AllSneakersLayout.vue';
 import AllSneakersMain from './ui/AllSneakersMain.vue';
 import AllSneakersTop from './ui/AllSneakersTop.vue';
 
-const {items, sortedItems, searchInputText} = useAllSneakers();
+const {items, sortedItems, searchInputText, sortBy} = useAllSneakers();
 
 
 </script>
 <template>
   <AllSneakersLayout>
-    <AllSneakersTop v-model:search="searchInputText"/>
-    <!-- <AllSneakersTop
-      v-model:filter="allSneakersSettings.sortBy"
-      v-model:search="allSneakersSettings.searchQuery"
-      @handle-sort-change="(e) => handleSortChange(allSneakersSettings, e)"
-    /> -->
+    <AllSneakersTop
+      v-model:filter="sortBy"
+      v-model:search="searchInputText" 
+      :sort-by="sortBy"
+      @handle-sort-change="(e) => handleSortChange(e, sortBy)"/>
     <AllSneakersMain >
       <BaseLoading  v-if="items.length === 0" class="col-span-full"/>
       <BaseSneakersCard
