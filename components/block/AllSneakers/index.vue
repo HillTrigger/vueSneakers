@@ -1,19 +1,11 @@
 <script setup lang="js">
-import { getSneakersList } from './model/getSneakersList';
 import useAllSneakers from './model/useAllSneakers';
 import AllSneakersLayout from './ui/AllSneakersLayout.vue';
 import AllSneakersMain from './ui/AllSneakersMain.vue';
 import AllSneakersTop from './ui/AllSneakersTop.vue';
 
-const {items, searchInputText} = useAllSneakers();
+const {items, sortedItems, searchInputText} = useAllSneakers();
 
-onMounted(async () => {
-	items.value = await getSneakersList(searchInputText);
-});
-
-watch(searchInputText, async () => {
-	items.value = await getSneakersList(searchInputText);
-});
 
 </script>
 <template>
@@ -27,7 +19,7 @@ watch(searchInputText, async () => {
     <AllSneakersMain >
       <BaseLoading  v-if="items.length === 0" class="col-span-full"/>
       <BaseSneakersCard
-        v-for="sneaker in items"
+        v-for="sneaker in sortedItems"
         :id="sneaker.id"
         :key="sneaker.id"
         :image-url="sneaker.imageUrl"
