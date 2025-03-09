@@ -14,6 +14,7 @@ import AllSneakersTop from './ui/AllSneakersTop.vue';
     /> -->
     <AllSneakersMain >
       <!-- <BaseSneakersCard/> -->
+      <BaseSneakersCard/>
       <!-- <SneakersCard
         v-for="sneaker in getSearchedArray(allSneakersSettings.sneakersData)"
         :id="sneaker.id"
