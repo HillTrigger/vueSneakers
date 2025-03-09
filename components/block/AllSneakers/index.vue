@@ -1,26 +1,31 @@
 <script setup lang="js">
 import { getSneakersList } from './model/getSneakersList';
+import useAllSneakers from './model/useAllSneakers';
 import AllSneakersLayout from './ui/AllSneakersLayout.vue';
 import AllSneakersMain from './ui/AllSneakersMain.vue';
 import AllSneakersTop from './ui/AllSneakersTop.vue';
 
-const items = ref([]);
-
+const {items, searchInputText} = useAllSneakers();
 
 onMounted(async () => {
-	items.value = await getSneakersList();
+	items.value = await getSneakersList(searchInputText);
 });
+
+watch(searchInputText, async () => {
+	items.value = await getSneakersList(searchInputText);
+});
+
 </script>
 <template>
   <AllSneakersLayout>
-    <AllSneakersTop/>
+    <AllSneakersTop v-model:search="searchInputText"/>
     <!-- <AllSneakersTop
       v-model:filter="allSneakersSettings.sortBy"
       v-model:search="allSneakersSettings.searchQuery"
       @handle-sort-change="(e) => handleSortChange(allSneakersSettings, e)"
     /> -->
     <AllSneakersMain >
-      <BaseLoading  v-if="items.length == 0" class="col-span-full "/>
+      <BaseLoading  v-if="items.length === 0" class="col-span-full"/>
       <BaseSneakersCard
         v-for="sneaker in items"
         :id="sneaker.id"
