@@ -17,7 +17,10 @@ export default function useAllSneakers() {
 		const sneakersData = await getSneakersList(searchInputText);
 
 		items.value = sneakersData;
-		sortedItems.value = sneakersData;
+
+		const sneakersDataSorted = searchSneakers(items.value, searchInputText);
+		sortedItems.value = sortSneakers(sneakersDataSorted, sortByName);
+		// sortedItems.value = sneakersDataSorted;
 	});
 	
 	watch([searchInputText, sortByName], () => {

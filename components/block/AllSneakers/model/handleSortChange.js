@@ -16,6 +16,8 @@ export function handleSortChange(e, sortByName) {
       case sortMethods.sortByPriceDesc:
         sortByName.value = sortMethods.sortByPriceAsc;
         break;
+			default:
+				throw Error('Переданный метод сортировки не существует!!!');
     }
   } else {
     sortByName.value = e;

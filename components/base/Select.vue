@@ -49,9 +49,9 @@ const selected = ref(props.default || (props.options.length > 0 ? props.options[
 
 const open = ref(false);
 
-onMounted(() => {
-  emit('input', selected.value);
-});
+// onMounted(() => {
+//   emit('input', selected.value);
+// });
 </script>
 
 <style scoped>
