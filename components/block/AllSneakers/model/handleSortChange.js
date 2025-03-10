@@ -1,19 +1,23 @@
-import { sortOrder } from '../constans';
+import { sortMethods } from '../constans';
 
-export function handleSortChange(e, sortBy) {
-	if (sortBy.name === e.target.value) {
-	console.log(e.target.value);
-	if (sortBy[e.target.value] === sortOrder.asc) {
-      sortBy = {
-        ...sortBy,
-        [e.target.value]: sortOrder.desc,
-      };
-    } else {
-      sortBy = {
-        sortBy,
-        [e.target.value]: sortOrder.asc,
-      };
+export function handleSortChange(e, sortByName) {
+
+  if (sortByName.value === e) {
+    switch (e) {
+      case sortMethods.sortByDefaultAsc:
+        sortByName.value = sortMethods.sortByDefaultDesc;
+        break;
+      case sortMethods.sortByDefaultDesc:
+        sortByName.value = sortMethods.sortByDefaultAsc;
+        break;
+      case sortMethods.sortByPriceAsc:
+        sortByName.value = sortMethods.sortByPriceDesc;
+        break;
+      case sortMethods.sortByPriceDesc:
+        sortByName.value = sortMethods.sortByPriceAsc;
+        break;
     }
+  } else {
+    sortByName.value = e;
   }
-	
 }

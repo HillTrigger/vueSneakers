@@ -1,7 +1,7 @@
 <template>
   <div class="custom-select" :tabindex="tabindex" @blur="open = false">
     <div class="selected" :class="{ open: open }" @click="open = !open">
-      {{ selected }}
+      {{ sortByName }}
     </div>
     <div class="items" :class="{ selectHide: !open }">
       <div
@@ -13,44 +13,45 @@
           $emit('input', option);
         "
       >
-        {{ option }}
+        {{ option.slice(0, -2) }}
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    options: {
-      type: Array,
-      required: true,
-    },
-    default: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    tabindex: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
+<script setup>
+import { ref, defineProps, defineEmits, onMounted } from 'vue';
+
+const props = defineProps({
+  options: {
+    type: Array,
+    required: true,
   },
-  data() {
-    return {
-      selected: this.default
-        ? this.default
-        : this.options.length > 0
-        ? this.options[0]
-        : null,
-      open: false,
-    };
+  default: {
+    type: String,
+    required: false,
+    default: null,
   },
-  mounted() {
-    this.$emit('input', this.selected);
+	sortByName: {
+    type: String,
+		required: true
   },
-};
+  tabindex: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+});
+
+const emit = defineEmits(['input']);
+
+const selected = ref(props.default || (props.options.length > 0 ? props.options[0] : null));
+
+const open = ref(false);
+
+onMounted(() => {
+  emit('input', selected.value);
+});
 </script>
 
 <style scoped>

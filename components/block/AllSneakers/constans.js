@@ -1,6 +1,8 @@
 export const sortMethods = {
-  sortByDefault: 'sortByDefault',
-  sortByPrice: 'sortByPrice',
+  sortByDefaultAsc: 'По порядку ↓',
+  sortByDefaultDesc: 'По порядку ↑',
+  sortByPriceAsc: 'По цене ↓',
+  sortByPriceDesc: 'По цене ↑',
 };
 
 export const sortOrder = {

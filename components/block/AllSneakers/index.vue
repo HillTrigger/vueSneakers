@@ -5,17 +5,19 @@ import AllSneakersLayout from './ui/AllSneakersLayout.vue';
 import AllSneakersMain from './ui/AllSneakersMain.vue';
 import AllSneakersTop from './ui/AllSneakersTop.vue';
 
-const {items, sortedItems, searchInputText, sortBy} = useAllSneakers();
+const {items, sortedItems, searchInputText, sortByName} = useAllSneakers();
 
+const wrapperHandleSortChange = (e) => {
+  handleSortChange(e, sortByName);
+};
 
 </script>
 <template>
   <AllSneakersLayout>
     <AllSneakersTop
-      v-model:filter="sortBy"
       v-model:search="searchInputText" 
-      :sort-by="sortBy"
-      @handle-sort-change="(e) => handleSortChange(e, sortBy)"/>
+      :sort-by-name="sortByName"
+      @handle-sort-change="wrapperHandleSortChange"/> <!-- передаю ref переменную в emit -->
     <AllSneakersMain >
       <BaseLoading  v-if="items.length === 0" class="col-span-full"/>
       <BaseSneakersCard
