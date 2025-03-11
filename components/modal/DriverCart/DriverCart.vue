@@ -1,15 +1,13 @@
-<!-- <script setup lang="js">
+<script setup lang="js">
 import { computed, inject, ref } from 'vue';
 
-import DriverCartBottom from './ui/DriverCartBottom.vue';
-import DriverCartItem from './ui/DriverCartItem.vue';
 import DriverCartLayout from './ui/DriverCartLayout.vue';
-import DriverCartMain from './ui/DriverCartMain.vue';
 import DriverCartTop from './ui/DriverCartTop.vue';
 import Arrow from './ui/icons/Arrow.vue';
 import DriverCartModalBody from './ui/DriverCartModalBody.vue';
 
-import Infoblock from '@/components/infoBlock/InfoBlock.vue';
+import './css/driverCart.css';
+// import Infoblock from '@/components/infoBlock/InfoBlock.vue';
 
 defineProps({
   cartItems: {
@@ -26,18 +24,18 @@ defineProps({
   },
 });
 
-const { driverCartCloseOut, driverCartClose } = inject('driverCartActions');
-const emit = defineEmits(['addToCart', 'createOrder']);
+// const { driverCartCloseOut, driverCartClose } = inject('driverCartActions');
+const emit = defineEmits(['driverCartClose', 'driverCartCloseOut']);
 
 // const isEmpty = computed(() => cartItems.length === 0);
 // console.log(isEmpty);
 </script>
 
 <template>
-  <DriverCartLayout @driver-cart-close="driverCartCloseOut">
+  <DriverCartLayout @driver-cart-close="(e) => emit('driverCartCloseOut', e)">
     <DriverCartModalBody>
-      <DriverCartTop @click="driverCartClose"><Arrow />Корзина</DriverCartTop>
-      <DriverCartMain v-if="!isEmpty">
+      <DriverCartTop @click="emit('driverCartClose')"><Arrow />Корзина</DriverCartTop>
+      <!-- <DriverCartMain v-if="!isEmpty">
         <DriverCartItem
           v-for="sneaker in cartItems"
           :key="sneaker.id"
@@ -46,19 +44,19 @@ const emit = defineEmits(['addToCart', 'createOrder']);
           :price="sneaker.price"
           @add-to-cart="(btnCartRef) => emit('addToCart', sneaker, btnCartRef)"
         />
-      </DriverCartMain>
-      <Infoblock
+      </DriverCartMain> -->
+      <!-- <Infoblock
         v-if="isEmpty"
         title="Корзина пустая"
         desc="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
         image-url="/src/assets/package-icon.png"
         @driver-cart-close="driverCartClose"
-      />
-      <DriverCartBottom
+      /> -->
+      <!-- <DriverCartBottom
         v-if="!isEmpty"
         :cart-total-price="cartTotalPrice"
         @create-order="(isFormActive) => emit('createOrder', isFormActive)"
-      />
+      /> -->
     </DriverCartModalBody>
   </DriverCartLayout>
-</template> -->
+</template>

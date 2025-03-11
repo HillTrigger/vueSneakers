@@ -1,4 +1,6 @@
 <script setup>
+import { useDriverCart } from '../../modal/DriverCart/js/useDriverCart';
+
 import HeaderLayout from './ui/HeaderLayout.vue';
 import Controls from './ui/Controls.vue';
 import Control from './ui/Control.vue';
@@ -6,14 +8,19 @@ import Basket from './ui/icons/Basket.vue';
 import Heart from './ui/icons/Heart.vue';
 import People from './ui/icons/People.vue';
 
-const totalCartPrice = 15000;
+
+// const totalCartPrice = 15000;
+
+const {totalCartPrice } = useAllSneakersStore();
+const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } = useDriverCart();
+
 </script>
 
 <template>
   <HeaderLayout>
     <nuxt-link to="/"><base-logo /></nuxt-link>
     <Controls>
-      <Control is-bold>
+      <Control is-bold @click="driverCartOpen">
         <template #svg>
           <Basket />
         </template>
@@ -34,16 +41,13 @@ const totalCartPrice = 15000;
     </Controls>
     <Teleport to="body">
       <transition name="driverCart">
-        <!-- <ModalDriverCart
+        <ModalDriverCart
           v-if="driverCartState"
-          :is-empty="allSneakersSettings.cartData.cartItems.length === 0"
-          :cart-total-price="storeAllSneakers.totalCartPrice"
-          :cart-items="getCartItems(allSneakersSettings.sneakersData, allSneakersSettings.cartData)"
-          @add-to-cart="(sneaker, btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
-          @create-order="
-            (isFormActive) => createOrder(allSneakersSettings, storeAllSneakers, isFormActive)
-          "
-        /> -->
+          :is-empty="true"
+          :cart-total-price="totalCartPrice"
+          @driver-cart-close="driverCartClose"
+          @driver-cart-close-out="(e) => driverCartCloseOut(e)"
+        />
       </transition>
     </Teleport>
   </HeaderLayout>
