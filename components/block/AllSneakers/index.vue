@@ -17,7 +17,7 @@ const wrapperHandleSortChange = (e) => {
     <AllSneakersTop
       v-model:search="searchInputText" 
       :sort-by-name="sortByName"
-      @handle-sort-change="wrapperHandleSortChange"/> <!-- передаю ref переменную в emit -->
+      @handle-sort-change="wrapperHandleSortChange"/>
     <AllSneakersMain >
       <BaseLoading  v-if="items.length === 0" class="col-span-full"/>
       <BaseSneakersCard
@@ -30,16 +30,6 @@ const wrapperHandleSortChange = (e) => {
         :is-added="sneaker.isAdded"
         :is-favorite="sneaker.isFavorite" 
       />
-      <!-- <SneakersCard
-        v-for="sneaker in getSneakersList()"
-        :id="sneaker.id"
-        :key="sneaker.id"
-        :image-url="sneaker.imageUrl"
-        :title="sneaker.title"
-        :price="sneaker.price"
-        :is-added="sneaker.isAdded"
-        :is-favorite="sneaker.isFavorite"
-      /> -->
     </AllSneakersMain>
   </AllSneakersLayout>
 </template>

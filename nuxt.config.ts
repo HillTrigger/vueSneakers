@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxt/eslint',
-    '@nuxtjs/tailwindcss',
+    '@nuxtjs/tailwindcss', '@pinia/nuxt',
   ],
 	vite: {
     plugins: [svgLoader()]

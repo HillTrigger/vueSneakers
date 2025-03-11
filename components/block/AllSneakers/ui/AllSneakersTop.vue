@@ -1,10 +1,6 @@
 <script setup lang="js">
 import Search from '../../../../assets/sprite/svg/search.svg';	
 import { sortMethods } from '../constans';
-// import Search from '@/assets/sprite/svg/search.svg';
-// import { sortMethods } from '../constans';
-
-// import Search from '@/assets/search.svg';
 
 defineProps({
   sortByName: {
@@ -17,13 +13,7 @@ const emit = defineEmits(['update:search', 'handleSortChange']);
 const handleInput = (event) => {
   emit('update:search', event.target.value);
 };
-// const handleSelect = (e) => {
-	
-//   emit('update:filter', {
-//     ...props.sortBy,
-//     name: e.target.value,
-//   });
-// };
+
 </script>
 
 <template>
@@ -36,19 +26,6 @@ const handleInput = (event) => {
         class="select w-32"
         @input="(e) => emit('handleSortChange', e)"
       />
-      <!-- <v-select></v-select> -->
-      <!-- <select
-        class="cursor-pointer flex items-center border-[#F3F3F3] outline-slate-400 border-2 focus:border-slate-400 focus-visible:border-slate-400 rounded-xl px-4 placeholder-[#C4C4C4]"
-        @change="handleSelect"
-        @click="(e) => emit('handleSortChange', e)"
-      >
-        <option :value="sortMethods.sortByDefault">
-          По порядку {{ sortBy[sortMethods.sortByDefault] }}
-        </option>
-        <option :value="sortMethods.sortByPrice">
-          По цене {{ sortBy[sortMethods.sortByPrice] }}
-        </option>
-      </select> -->
       <div class="relative flex items-center">
         <input
           placeholder="Поиск..."

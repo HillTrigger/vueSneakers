@@ -32,5 +32,19 @@ const totalCartPrice = 15000;
         <template #text>Профиль</template>
       </Control>
     </Controls>
+    <Teleport to="body">
+      <transition name="driverCart">
+        <!-- <ModalDriverCart
+          v-if="driverCartState"
+          :is-empty="allSneakersSettings.cartData.cartItems.length === 0"
+          :cart-total-price="storeAllSneakers.totalCartPrice"
+          :cart-items="getCartItems(allSneakersSettings.sneakersData, allSneakersSettings.cartData)"
+          @add-to-cart="(sneaker, btnCartRef) => addToCart(sneaker, btnCartRef, allSneakersSettings)"
+          @create-order="
+            (isFormActive) => createOrder(allSneakersSettings, storeAllSneakers, isFormActive)
+          "
+        /> -->
+      </transition>
+    </Teleport>
   </HeaderLayout>
 </template>
