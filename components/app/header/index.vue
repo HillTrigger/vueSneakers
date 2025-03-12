@@ -11,7 +11,7 @@ import People from './ui/icons/People.vue';
 
 // const totalCartPrice = 15000;
 
-const { totalCartPrice } = useAllSneakersStore();
+const { totalCartPrice, getCartItems } = useAllSneakersStore();
 const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } = useDriverCart();
 
 </script>
@@ -43,7 +43,8 @@ const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } =
       <transition name="driverCart">
         <ModalDriverCart
           v-if="driverCartState"
-          :is-empty="true"
+          :cart-items="getCartItems()"
+          :is-empty="getCartItems().length === 0"
           :cart-total-price="totalCartPrice"
           @driver-cart-close="driverCartClose"
           @driver-cart-close-out="(e) => driverCartCloseOut(e)"
