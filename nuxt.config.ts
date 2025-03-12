@@ -6,13 +6,11 @@ export default defineNuxtConfig({
     css: [
         '@/assets/styles/main.css'
     ],
-    alias: {
-    '~': './',
-    '@': './',
-  },
+
   modules: [
     '@nuxt/eslint',
-    '@nuxtjs/tailwindcss', '@pinia/nuxt',
+    '@nuxtjs/tailwindcss',
+		'@pinia/nuxt'
   ],
 	vite: {
     plugins: [svgLoader()]

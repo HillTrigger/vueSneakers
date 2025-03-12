@@ -11,7 +11,7 @@ import People from './ui/icons/People.vue';
 
 // const totalCartPrice = 15000;
 
-const {totalCartPrice } = useAllSneakersStore();
+const { totalCartPrice } = useAllSneakersStore();
 const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } = useDriverCart();
 
 </script>

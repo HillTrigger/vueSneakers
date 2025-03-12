@@ -5,8 +5,15 @@ import { sortMethods } from '../constans';
 import { getSneakersList } from './getSneakersList';
 import { searchSneakers } from './searchSneakers';
 import { sortSneakers } from './sortSneakers';
+import { updateDataFlags } from './updateDataFlags';
+
+import { useAllSneakersStore } from '@/stores/storeAllSneakers';
+import { getFavorites } from '~~/api/getFavorites';
+
 
 export default function useAllSneakers() {
+	const { getCartItems, setCartItem } = useAllSneakersStore();
+
 	const items = ref([]);
 	const sortedItems = ref([]);
 	const searchInputText = ref('');
@@ -15,10 +22,16 @@ export default function useAllSneakers() {
 
 	onMounted(async () => {
 		const sneakersData = await getSneakersList(searchInputText);
+		const favorites = await getFavorites();
+		// console.log(favorites);
 
-		items.value = sneakersData;
+		const cartItems = getCartItems();
+		
+		const newData = updateDataFlags(sneakersData, favorites, cartItems);
 
-		const sneakersDataSorted = searchSneakers(items.value, searchInputText);
+		items.value = newData;
+
+		const sneakersDataSorted = searchSneakers(newData, searchInputText);
 		sortedItems.value = sortSneakers(sneakersDataSorted, sortByName);
 		// sortedItems.value = sneakersDataSorted;
 	});
