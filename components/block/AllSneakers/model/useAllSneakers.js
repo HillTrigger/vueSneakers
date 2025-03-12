@@ -12,7 +12,7 @@ import { getFavorites } from '~~/api/getFavorites';
 
 
 export default function useAllSneakers() {
-	const { getCartItems, setCartItem } = useAllSneakersStore();
+	const { getCartItems } = useAllSneakersStore();
 
 	const items = ref([]);
 	const sortedItems = ref([]);

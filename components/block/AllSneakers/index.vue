@@ -1,4 +1,5 @@
 <script setup lang="js">
+import { favoriteToggle } from './model/favoriteToggle';
 import { handleSortChange } from './model/handleSortChange';
 import useAllSneakers from './model/useAllSneakers';
 import AllSneakersLayout from './ui/AllSneakersLayout.vue';
@@ -29,6 +30,7 @@ const wrapperHandleSortChange = (e) => {
         :price="sneaker.price"
         :is-added="sneaker.isAdded"
         :is-favorite="sneaker.isFavorite" 
+        @favorite-toggle="(likeRef) => favoriteToggle(sneaker, likeRef)"
       />
     </AllSneakersMain>
   </AllSneakersLayout>

@@ -29,8 +29,8 @@ defineProps({
   },
 });
 
-// const emit = defineEmits(['favoriteToggle', 'addToCart']);
-// const likeRef = ref(null);
+const emit = defineEmits(['favoriteToggle']);
+const likeRef = ref(null);
 // const btnCartRef = ref(null);
 </script>
 
@@ -41,7 +41,9 @@ defineProps({
     <img class="pointer-events-none max-w-36"  :src="imageUrl" alt="sneaker">
     <h5 class="text-sm mb-3.5">{{ title }}</h5>
     <button
+      ref="likeRef"
       class="absolute cursor-pointer"
+      @click="() => emit('favoriteToggle', likeRef)"
     >
       <LikeOn v-if="isFavorite" class="text-[#FEF0F0] hover:text-[rgb(234,221,221)]" />
       <LikeOff v-else class="text-white hover:text-gray-100" />
