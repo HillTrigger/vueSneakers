@@ -1,5 +1,4 @@
 <script setup lang="js">
-import { ref } from 'vue';
 
 import Cross from '@/assets/sprite/svg/close.svg';
 defineProps({
@@ -17,8 +16,8 @@ defineProps({
   },
 });
 
-const emit = defineEmits(['addToCart']);
-const btnCartRef = ref(null);
+const emit = defineEmits(['toggleCartItem']);
+// const btnCartRef = ref(null);
 
 // const handleClick = () => {
 //   btnCartRef.value.disabled = true;
@@ -38,7 +37,7 @@ const btnCartRef = ref(null);
     <button
       ref="btnCartRef"
       class="max-w-8 h-8 self-end cursor-pointer w-full group"
-      @click="() => emit('addToCart', btnCartRef)"
+      @click="() => emit('toggleCartItem')"
     >
       <Cross class="text-white group-hover:text-gray-100" />
     </button>

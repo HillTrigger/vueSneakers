@@ -1,11 +1,15 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
 
 
 export const useAllSneakersStore = defineStore('allSneakersStore', () => {
-  const totalCartPrice = ref(0);
-
+	const totalCartPrice = ref([]);
 	const cartItems = ref([]);
+
+	watch(cartItems,() => {
+		totalCartPrice.value = cartItems.value.reduce((acc, sneaker) => acc + sneaker.price, 0);
+		// console.log(cartItems.value.reduce((acc, sneaker) => acc + sneaker.price, 0));
+	}, {deep: true});
+
 
   function getCartItems() {
     try {
@@ -35,11 +39,11 @@ export const useAllSneakersStore = defineStore('allSneakersStore', () => {
 		}
 	}
 	
-  function updateStoreCartPrice(newTotalCartPrice) {
-    totalCartPrice.value = newTotalCartPrice;
-  }
+  // function updateStoreCartPrice(newTotalCartPrice) {
+  //   totalCartPrice.value = newTotalCartPrice;
+  // }
 
-  return { totalCartPrice, cartItems, updateStoreCartPrice, getCartItems,  toggleCartItem };
+  return { totalCartPrice, cartItems, getCartItems,  toggleCartItem };
 });
 
 

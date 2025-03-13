@@ -1,5 +1,4 @@
 // import { getSneakersList } from './getSneakersList';
-
 import { sortMethods } from '../constans';
 
 import { getSneakersList } from './getSneakersList';
@@ -13,7 +12,7 @@ import { getFavorites } from '~~/api/getFavorites';
 
 export default function useAllSneakers() {
 	const allSneakersStore = useAllSneakersStore();
-	const {getCartItems, toggleCartItem} =allSneakersStore;
+	const {getCartItems, toggleCartItem} = allSneakersStore;
 
 	const items = ref([]);
 	const sortedItems = ref([]);
@@ -44,7 +43,6 @@ export default function useAllSneakers() {
 	});
 	
 	watch(() => allSneakersStore.cartItems, () => { // Проблема: если я достаю переменную из стора деструкторизацией, то реактивность теряется
-		console.log('123');
 		
 		updateDataFlags(items, undefined, allSneakersStore.cartItems);
 		updateSneakersData(items.value, sortedItems, searchInputText, sortByName);

@@ -21,7 +21,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['driverCartClose', 'driverCartCloseOut']);
+const emit = defineEmits(['driverCartClose', 'driverCartCloseOut', 'toggleCartItem']);
 
 
 const isEmpty = computed(() => props.cartItems.length === 0);
@@ -38,6 +38,7 @@ const isEmpty = computed(() => props.cartItems.length === 0);
           :image-url="sneaker.imageUrl"
           :title="sneaker.title"
           :price="sneaker.price"
+          @toggle-cart-item="emit('toggleCartItem', sneaker)"
         />
       </DriverCartMain>
       <BaseInfoBlock

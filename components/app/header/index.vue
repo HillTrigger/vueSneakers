@@ -8,10 +8,11 @@ import Basket from './ui/icons/Basket.vue';
 import Heart from './ui/icons/Heart.vue';
 import People from './ui/icons/People.vue';
 
+import { useAllSneakersStore } from '@/stores/storeAllSneakers';
 
-// const totalCartPrice = 15000;
 
-const { totalCartPrice, getCartItems } = useAllSneakersStore();
+const allSneakersStore = useAllSneakersStore();
+// const { totalCartPrice, getCartItems } = useAllSneakersStore();
 const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } = useDriverCart();
 
 </script>
@@ -24,7 +25,7 @@ const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } =
         <template #svg>
           <Basket />
         </template>
-        <template #text>{{ totalCartPrice.toLocaleString('ru-RU') + ' руб.' }}</template>
+        <template #text>{{ allSneakersStore.totalCartPrice.toLocaleString('ru-RU') + ' руб.' }}</template>
       </Control>
       <Control>
         <template #svg>
@@ -43,10 +44,11 @@ const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } =
       <transition name="driverCart">
         <ModalDriverCart
           v-if="driverCartState"
-          :cart-items="getCartItems()"
-          :cart-total-price="totalCartPrice"
+          :cart-items="allSneakersStore.getCartItems()"
+          :cart-total-price="allSneakersStore.totalCartPrice"
           @driver-cart-close="driverCartClose"
           @driver-cart-close-out="(e) => driverCartCloseOut(e)"
+          @toggle-cart-item="(sneaker) => allSneakersStore.toggleCartItem(sneaker)"
         />
       </transition>
     </Teleport>
