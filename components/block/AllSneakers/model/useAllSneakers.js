@@ -12,8 +12,9 @@ import { getFavorites } from '~~/api/getFavorites';
 
 
 export default function useAllSneakers() {
-	const { getCartItems } = useAllSneakersStore();
-
+	const allSneakersStore = useAllSneakersStore();
+	// const { cartItems, getCartItems, toggleCartItem } = storeToRefs( useAllSneakersStore() );
+	const {getCartItems, toggleCartItem} =allSneakersStore;
 	const items = ref([]);
 	const sortedItems = ref([]);
 	const searchInputText = ref('');
@@ -21,27 +22,39 @@ export default function useAllSneakers() {
 	const sortByName = ref(sortMethods.sortByDefaultAsc);
 
 	onMounted(async () => {
-		const sneakersData = await getSneakersList(searchInputText);
+		const sneakersData = await getSneakersList();
 		const favorites = await getFavorites();
-		// console.log(favorites);
 
-		const cartItems = getCartItems();
+		const cartItemsFromStore = getCartItems();
+		items.value = sneakersData;
+		// console.log(items);
 		
-		const newData = updateDataFlags(sneakersData, favorites, cartItems);
+		updateDataFlags(items, favorites, cartItemsFromStore);
 
-		items.value = newData;
 
-		const sneakersDataSorted = searchSneakers(newData, searchInputText);
+		const sneakersDataSorted = searchSneakers(items.value, searchInputText);
 		sortedItems.value = sortSneakers(sneakersDataSorted, sortByName);
-		// sortedItems.value = sneakersDataSorted;
 	});
 	
 	watch([searchInputText, sortByName], () => {
-		const sneakersData = searchSneakers(items.value, searchInputText);
-		sortedItems.value = sortSneakers(sneakersData, sortByName);
+		
+		updateSneakersData(items.value, sortedItems, searchInputText, sortByName);
+	}, {
+		deep: true
+	});
+	
+	watch(() => allSneakersStore.cartItems, () => { // Проблема: если я достаю переменную из стора деструкторизацией, то реактивность теряется
+		
+		updateDataFlags(items, undefined, allSneakersStore.cartItems);
+		updateSneakersData(items.value, sortedItems, searchInputText, sortByName);
 	}, {
 		deep: true
 	});
 
-	return ({items, sortedItems, sortByName, searchInputText});
+	return ({items, sortedItems, sortByName, searchInputText, toggleCartItem});
+}
+
+function updateSneakersData(items, sortedItems, searchInputText, sortByName ) {
+	const sneakersData = searchSneakers(items, searchInputText);
+	sortedItems.value = sortSneakers(sneakersData, sortByName);
 }

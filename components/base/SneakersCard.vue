@@ -29,7 +29,7 @@ defineProps({
   },
 });
 
-const emit = defineEmits(['favoriteToggle']);
+const emit = defineEmits(['favoriteToggle', 'toggleCartItem']);
 const likeRef = ref(null);
 // const btnCartRef = ref(null);
 </script>
@@ -53,7 +53,7 @@ const likeRef = ref(null);
         <span class="text-xs text-[#BDBDBD]">ЦЕНА:</span>
         <span class="text-sm font-bold">{{ price.toLocaleString('ru-RU') + ' руб.' }}</span>
       </div>
-      <button class="cursor-pointer">
+      <button class="cursor-pointer" @click="emit('toggleCartItem')">
         <Checked v-if="isAdded" />
         <Plus v-else class="text-white hover:text-gray-100" />
       </button>

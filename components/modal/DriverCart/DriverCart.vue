@@ -1,14 +1,13 @@
 <script setup lang="js">
-import { computed, inject, ref } from 'vue';
+// import { computed, inject, ref } from 'vue';
+import './css/driverCart.css';
 
 import DriverCartLayout from './ui/DriverCartLayout.vue';
 import DriverCartTop from './ui/DriverCartTop.vue';
-import Arrow from './ui/icons/Arrow.vue';
 import DriverCartModalBody from './ui/DriverCartModalBody.vue';
-
-import './css/driverCart.css';
 import DriverCartBottom from './ui/DriverCartBottom.vue';
 import DriverCartMain from './ui/DriverCartMain.vue';
+import Arrow from './ui/icons/Arrow.vue';
 
 defineProps({
   cartItems: {

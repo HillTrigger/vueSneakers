@@ -1,13 +1,28 @@
-export function updateDataFlags(data, favorites, cartItems) {
-  return data.map((sneaker) => {
-    const favorite = favorites.find((favorite) => favorite.parentId === sneaker.id) || null;
-    const isAdded = cartItems.some((id) => id === sneaker.id);
+export function updateDataFlags(items, favorites = [], cartItems = []) {
+  const cartItemsMap = new Map(cartItems.map((sneakerInCart) => [sneakerInCart.id, sneakerInCart]));
 
-    return {
-      ...sneaker,
-      favoriteId: favorite?.id,
-      isFavorite: !!favorite,
-      isAdded: isAdded,
-    };
-  });
-}
+  if (favorites.length > 0) {
+    const favoritesMap = new Map(favorites.map((favorite) => [favorite.parentId, favorite]));
+
+    items.value = items.value.map((sneaker) => {
+      const favorite = favoritesMap.get(sneaker.id);
+      const isAdded = cartItemsMap.has(sneaker.id);
+
+      return {
+        ...sneaker,
+        favoriteId: favorite ? favorite.id : null,
+        isFavorite: !!favorite,
+        isAdded: isAdded,
+      };
+    });
+  } else {
+    items.value = items.value.map((sneaker) => {
+      const isAdded = cartItemsMap.has(sneaker.id);
+
+      return {
+        ...sneaker,
+        isAdded: isAdded,
+      };
+    });
+  }
+} 

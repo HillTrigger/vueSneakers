@@ -6,7 +6,7 @@ import AllSneakersLayout from './ui/AllSneakersLayout.vue';
 import AllSneakersMain from './ui/AllSneakersMain.vue';
 import AllSneakersTop from './ui/AllSneakersTop.vue';
 
-const {items, sortedItems, searchInputText, sortByName} = useAllSneakers();
+const {items, sortedItems, searchInputText, sortByName, toggleCartItem} = useAllSneakers();
 
 const wrapperHandleSortChange = (e) => {
   handleSortChange(e, sortByName);
@@ -20,7 +20,7 @@ const wrapperHandleSortChange = (e) => {
       :sort-by-name="sortByName"
       @handle-sort-change="wrapperHandleSortChange"/>
     <AllSneakersMain >
-      <BaseLoading  v-if="items.length === 0" class="col-span-full"/>
+      <!-- <BaseLoading  v-if="items.length === 0" class="col-span-full"/> -->
       <BaseSneakersCard
         v-for="sneaker in sortedItems"
         :id="sneaker.id"
@@ -31,6 +31,7 @@ const wrapperHandleSortChange = (e) => {
         :is-added="sneaker.isAdded"
         :is-favorite="sneaker.isFavorite" 
         @favorite-toggle="(likeRef) => favoriteToggle(sneaker, likeRef)"
+        @toggle-cart-item="() => toggleCartItem(sneaker)"
       />
     </AllSneakersMain>
   </AllSneakersLayout>
