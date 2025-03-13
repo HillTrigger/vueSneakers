@@ -1,15 +1,16 @@
 <script setup lang="js">
-// import { computed, inject, ref } from 'vue';
+import { computed } from 'vue';
 import './css/driverCart.css';
 
 import DriverCartLayout from './ui/DriverCartLayout.vue';
 import DriverCartTop from './ui/DriverCartTop.vue';
+import DriverCartItem from './ui/DriverCartItem.vue';
 import DriverCartModalBody from './ui/DriverCartModalBody.vue';
 import DriverCartBottom from './ui/DriverCartBottom.vue';
 import DriverCartMain from './ui/DriverCartMain.vue';
 import Arrow from './ui/icons/Arrow.vue';
 
-defineProps({
+const props = defineProps({
   cartItems: {
     type: Array,
     default: () => [],
@@ -17,18 +18,13 @@ defineProps({
   cartTotalPrice: {
     type: Number,
     default: 0,
-  },
-	isEmpty: {
-    type: Boolean,
-    default: false,
   }
 });
 
-// const { driverCartCloseOut, driverCartClose } = inject('driverCartActions');
 const emit = defineEmits(['driverCartClose', 'driverCartCloseOut']);
 
-// const isEmpty = computed(() => cartItems.length === 0);
-// console.log(isEmpty);
+
+const isEmpty = computed(() => props.cartItems.length === 0);
 </script>
 
 <template>
@@ -36,14 +32,13 @@ const emit = defineEmits(['driverCartClose', 'driverCartCloseOut']);
     <DriverCartModalBody>
       <DriverCartTop @click="emit('driverCartClose')"><Arrow />Корзина</DriverCartTop>
       <DriverCartMain v-if="!isEmpty">
-        <!-- <DriverCartItem
+        <DriverCartItem
           v-for="sneaker in cartItems"
           :key="sneaker.id"
           :image-url="sneaker.imageUrl"
           :title="sneaker.title"
           :price="sneaker.price"
-          @add-to-cart="(btnCartRef) => emit('addToCart', sneaker, btnCartRef)"
-        /> -->
+        />
       </DriverCartMain>
       <BaseInfoBlock
         v-if="isEmpty"

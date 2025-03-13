@@ -1,6 +1,7 @@
 <script setup lang="js">
-import Cross from '@/assets/close.svg';
 import { ref } from 'vue';
+
+import Cross from '@/assets/sprite/svg/close.svg';
 defineProps({
   imageUrl: {
     type: String,
@@ -29,15 +30,15 @@ const btnCartRef = ref(null);
   <div
     class="flex gap-4 p-5 w-full items-center border-2 border-[#F3F3F3] hover:border-gray-300 rounded-2xl"
   >
-    <img class="pointer-events-none w-20 h-20" :src="imageUrl" :alt="title" />
+    <img class="pointer-events-none w-20 h-20" :src="imageUrl" :alt="title" >
     <div class="flex flex-col gap-2">
       <p class="text-sm">{{ title }}</p>
       <span class="text-sm font-bold" n>{{ price.toLocaleString('ru-RU') + ' руб.' }}</span>
     </div>
     <button
-      @click="() => emit('addToCart', btnCartRef)"
       ref="btnCartRef"
       class="max-w-8 h-8 self-end cursor-pointer w-full group"
+      @click="() => emit('addToCart', btnCartRef)"
     >
       <Cross class="text-white group-hover:text-gray-100" />
     </button>

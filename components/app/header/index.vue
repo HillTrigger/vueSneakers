@@ -44,7 +44,6 @@ const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } =
         <ModalDriverCart
           v-if="driverCartState"
           :cart-items="getCartItems()"
-          :is-empty="getCartItems().length === 0"
           :cart-total-price="totalCartPrice"
           @driver-cart-close="driverCartClose"
           @driver-cart-close-out="(e) => driverCartCloseOut(e)"
