@@ -28,7 +28,7 @@ export default function useAllSneakers() {
 		items.value = sneakersData;
 		// console.log(items);
 		
-		updateDataFlags(items, favorites, cartItemsFromStore);
+		updateDataFlags(items, favorites, cartItemsFromStore); //тут реактивность не теряется
 
 
 		const sneakersDataSorted = searchSneakers(items.value, searchInputText);
@@ -44,7 +44,7 @@ export default function useAllSneakers() {
 	
 	watch(() => allSneakersStore.cartItems, () => { // Проблема: если я достаю переменную из стора деструкторизацией, то реактивность теряется
 		
-		updateDataFlags(items, undefined, allSneakersStore.cartItems);
+		updateDataFlags(items, undefined, allSneakersStore.cartItems); // а тут теряется
 		updateSneakersData(items.value, sortedItems, searchInputText, sortByName);
 	}, {
 		deep: true

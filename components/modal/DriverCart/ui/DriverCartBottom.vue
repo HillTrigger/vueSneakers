@@ -15,7 +15,8 @@ const emit = defineEmits(['createOrder']);
 // Функция для передачи isFormActive как ref в createOrder
 const handleCreateOrder = () => {
   // Передаем сам ref, а не его значение
-  emit('createOrder', isFormActive.value);
+  // eslint-disable-next-line vue/no-ref-as-operand
+  emit('createOrder', isFormActive);
 };
 const isFormActive = ref(true);
 </script>

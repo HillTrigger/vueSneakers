@@ -2,7 +2,9 @@ import { defineStore } from 'pinia';
 
 
 export const useAllSneakersStore = defineStore('allSneakersStore', () => {
-	const totalCartPrice = ref([]);
+	// const totalCartPrice = ref(0);
+	// const cartItems = ref([]);
+	const totalCartPrice = ref(0);
 	const cartItems = ref([]);
 
 	watch(cartItems,() => {
@@ -43,7 +45,13 @@ export const useAllSneakersStore = defineStore('allSneakersStore', () => {
   //   totalCartPrice.value = newTotalCartPrice;
   // }
 
-  return { totalCartPrice, cartItems, getCartItems,  toggleCartItem };
+
+	function resetValue() {
+		cartItems.value = [];
+		localStorage.removeItem('cartData');
+	}
+
+  return { totalCartPrice, cartItems, getCartItems,  toggleCartItem, resetValue};
 });
 
 

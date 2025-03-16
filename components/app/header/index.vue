@@ -9,12 +9,17 @@ import Heart from './ui/icons/Heart.vue';
 import People from './ui/icons/People.vue';
 
 import { useAllSneakersStore } from '@/stores/storeAllSneakers';
+import { createOrder } from '~/components/modal/DriverCart/js/createOrder';
 
 
 const allSneakersStore = useAllSneakersStore();
-// const { totalCartPrice, getCartItems } = useAllSneakersStore();
+
 const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } = useDriverCart();
 
+
+// const handleCreateOrder = (isFormActive, totalCartPrice) => {
+// 	return createOrder(isFormActive, totalCartPrice, allSneakersStore.cartItems);
+// };
 </script>
 
 <template>
@@ -49,6 +54,7 @@ const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } =
           @driver-cart-close="driverCartClose"
           @driver-cart-close-out="(e) => driverCartCloseOut(e)"
           @toggle-cart-item="(sneaker) => allSneakersStore.toggleCartItem(sneaker)"
+          @create-order="(isFormActive) => createOrder(isFormActive, allSneakersStore.totalCartPrice, allSneakersStore.cartItems, allSneakersStore.resetValue)"
         />
       </transition>
     </Teleport>

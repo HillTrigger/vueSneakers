@@ -21,7 +21,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['driverCartClose', 'driverCartCloseOut', 'toggleCartItem']);
+const emit = defineEmits(['driverCartClose', 'driverCartCloseOut', 'toggleCartItem', 'createOrder']);
 
 
 const isEmpty = computed(() => props.cartItems.length === 0);
@@ -51,6 +51,7 @@ const isEmpty = computed(() => props.cartItems.length === 0);
       <DriverCartBottom
         v-if="!isEmpty"
         :cart-total-price="cartTotalPrice"
+        @create-order="(isFormActive) => emit('createOrder', isFormActive, cartItems)"
       />
     </DriverCartModalBody>
   </DriverCartLayout>

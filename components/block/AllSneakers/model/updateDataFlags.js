@@ -1,4 +1,7 @@
 export function updateDataFlags(items, favorites = [], cartItems = []) {
+	// console.log(cartItems.value);
+	// console.log(cartItems);
+	
   const cartItemsMap = new Map(cartItems.map((sneakerInCart) => [sneakerInCart.id, sneakerInCart]));
 
   if (favorites.length > 0) {
