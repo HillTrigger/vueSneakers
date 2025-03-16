@@ -10,7 +10,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
-		'@pinia/nuxt'
+		'@pinia/nuxt',
+		'@formkit/auto-animate/nuxt'
   ],
 	vite: {
     plugins: [svgLoader()]
