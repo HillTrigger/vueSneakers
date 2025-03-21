@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function createOrder(isFormActive, totalCartPrice, cartItems, resetValue) {
+export async function createOrder(isFormActive, totalCartPrice, cartItems, resetValue, orderId) {
   isFormActive.value = false;
   if (cartItems.length <= 0) {
     isFormActive.value = true;
@@ -17,6 +17,7 @@ export async function createOrder(isFormActive, totalCartPrice, cartItems, reset
 
 
 		resetValue();
+		orderId.value = data.id;
 		
     return data;
   } catch (err) {

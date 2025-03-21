@@ -23,6 +23,13 @@ const props = defineProps({
 
 const emit = defineEmits(['driverCartClose', 'driverCartCloseOut', 'toggleCartItem', 'createOrder']);
 
+const orderId = ref(null);
+
+
+const handleCreateOrder = (isFormActive) => {
+	// eslint-disable-next-line vue/no-ref-as-operand
+	emit('createOrder', isFormActive, orderId);
+};
 
 const isEmpty = computed(() => props.cartItems.length === 0);
 </script>
@@ -42,7 +49,14 @@ const isEmpty = computed(() => props.cartItems.length === 0);
         />
       </DriverCartMain>
       <BaseInfoBlock
-        v-if="isEmpty"
+        v-show="orderId"
+        title="Заказ оформлен!"
+        :desc="`Ваш заказ #${orderId} скоро будет передан курьерской доставке`"
+        image-url="/img/order-success-icon.png"
+        @driver-cart-close="emit('driverCartClose')"
+      />
+      <BaseInfoBlock
+        v-show="isEmpty && !orderId"
         title="Корзина пустая"
         desc="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
         image-url="/img/package-icon.png"
@@ -51,7 +65,7 @@ const isEmpty = computed(() => props.cartItems.length === 0);
       <DriverCartBottom
         v-if="!isEmpty"
         :cart-total-price="cartTotalPrice"
-        @create-order="(isFormActive) => emit('createOrder', isFormActive, cartItems)"
+        @create-order="handleCreateOrder"
       />
     </DriverCartModalBody>
   </DriverCartLayout>
