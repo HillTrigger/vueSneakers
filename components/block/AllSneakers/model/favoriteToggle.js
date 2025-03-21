@@ -7,7 +7,7 @@ export async function favoriteToggle(sneaker, likeRef) {
     if (!sneaker.isFavorite) {
       sneaker.isFavorite = true;
       const newFavorite = {
-        parentId: sneaker.id,
+        item_id: sneaker.id,
       };
       const { data } = await axios.post(
         'https://72f7c776150d43f2.mokky.dev/favorites',

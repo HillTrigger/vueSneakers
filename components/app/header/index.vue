@@ -36,7 +36,7 @@ const { driverCartState, driverCartOpen, driverCartClose, driverCartCloseOut } =
         <template #svg>
           <Heart />
         </template>
-        <template #text><NuxtLink to="/">Закладки</NuxtLink></template>
+        <template #text><NuxtLink to="/favorites">Закладки</NuxtLink></template>
       </Control>
       <Control>
         <template #svg>

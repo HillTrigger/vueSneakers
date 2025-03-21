@@ -1,6 +1,7 @@
 // import { getSneakersList } from './getSneakersList';
 import { sortMethods } from '../constans';
 
+import { getFavoritesList } from './getFavoritesList';
 import { getSneakersList } from './getSneakersList';
 import { searchSneakers } from './searchSneakers';
 import { sortSneakers } from './sortSneakers';
@@ -10,7 +11,7 @@ import { useAllSneakersStore } from '@/stores/storeAllSneakers';
 import { getFavorites } from '~~/api/getFavorites';
 
 
-export default function useAllSneakers() {
+export default function useAllSneakers({isFavorites}) {
 	const allSneakersStore = useAllSneakersStore();
 	const {getCartItems, toggleCartItem} = allSneakersStore;
 
@@ -21,7 +22,7 @@ export default function useAllSneakers() {
 	const sortByName = ref(sortMethods.sortByDefaultAsc);
 
 	onMounted(async () => {
-		const sneakersData = await getSneakersList();
+		const sneakersData = isFavorites ? await getFavoritesList() : await getSneakersList();
 		const favorites = await getFavorites();
 
 		const cartItemsFromStore = getCartItems();
